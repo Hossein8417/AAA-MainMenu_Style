@@ -1,0 +1,269 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: MyStrings_es
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: 740b0a5878eaae64ca7524447c698174, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 300403384320
+    m_Localized: Presione cualquier tecla
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020756992000
+    m_Localized: Historia
+    m_Metadata:
+      m_Items: []
+  - m_Id: 294742641336320
+    m_Localized: Extras
+    m_Metadata:
+      m_Items: []
+  - m_Id: 294994429599744
+    m_Localized: Opciones
+    m_Metadata:
+      m_Items: []
+  - m_Id: 295315109306368
+    m_Localized: Salir al escritorio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 296333519872000
+    m_Localized: seleccionar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 297881990815744
+    m_Localized: "Atr\xE1s"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 297890278760448
+    m_Localized: Nueva partida
+    m_Metadata:
+      m_Items: []
+  - m_Id: 297893768421376
+    m_Localized: Cargar partida
+    m_Metadata:
+      m_Items: []
+  - m_Id: 297898600259584
+    m_Localized: "\xA1Elige cualquier ranura para guardar los datos de tu nueva partida!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 297981177716736
+    m_Localized: "Modo Desaf\xEDo:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 300396396371968
+    m_Localized: Progreso (0%)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 300632313389056
+    m_Localized: 'Fecha y hora:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 301406145699840
+    m_Localized: Elige una ranura guardada para continuar tu partida.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 302598871539712
+    m_Localized: "Cr\xE9ditos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 303809846796288
+    m_Localized: Jugabilidad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 303850481213440
+    m_Localized: Controles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 303885549789184
+    m_Localized: "Asignaci\xF3n de teclas"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 303932320473088
+    m_Localized: Mostrar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 304007918608384
+    m_Localized: "Gr\xE1ficos avanzados"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 304046439096320
+    m_Localized: Audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 304081507672064
+    m_Localized: Idioma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 316994255544320
+    m_Localized: "\xBFSalir al escritorio?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 317296140574720
+    m_Localized: "S\xED"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 317487673466880
+    m_Localized: No
+    m_Metadata:
+      m_Items: []
+  - m_Id: 318175535128576
+    m_Localized: "Nivel de desaf\xEDo"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 318498999853056
+    m_Localized: "Subt\xEDtulos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 318848637034496
+    m_Localized: Pista del juego
+    m_Metadata:
+      m_Items: []
+  - m_Id: 319034830577664
+    m_Localized: Tutoriales
+    m_Metadata:
+      m_Items: []
+  - m_Id: 319264275783680
+    m_Localized: Modo foto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320011298103296
+    m_Localized: "Rat\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320063475245056
+    m_Localized: "C\xE1mara"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320095121268736
+    m_Localized: el contralorv
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320938172178432
+    m_Localized: "Sensibilidad del rat\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320990550646784
+    m_Localized: "Sensibilidad de la c\xE1mara"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 321064806604800
+    m_Localized: Sensibilidad del mando
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322079257747456
+    m_Localized: "Relaci\xF3n de aspecto"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322122907869184
+    m_Localized: "Resoluci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322165928845312
+    m_Localized: otro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322234950311936
+    m_Localized: Mostrar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322293066588160
+    m_Localized: V-Sync
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322369402920960
+    m_Localized: "Resoluci\xF3n de pantalla"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322422922240000
+    m_Localized: GPU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322473119670272
+    m_Localized: Aplicar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322501640937472
+    m_Localized: Reiniciar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 323939985219584
+    m_Localized: "Las resoluciones m\xE1s altas dar\xE1n lugar a sombras m\xE1s n\xEDtidas
+      y de mayor calidad.\r\nLos ajustes m\xE1s elevados afectar\xE1n al rendimiento
+      de la GPU."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 324059841650688
+    m_Localized: 'Uso estimado:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 324429343055872
+    m_Localized: 'Total:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 324646205349888
+    m_Localized: Video Memory (VRAM)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 326561156784128
+    m_Localized: Programar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 326815360966656
+    m_Localized: Texturas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 326963034021888
+    m_Localized: Calidad del modelo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 327117019504640
+    m_Localized: "Filtro anisotr\xF3pico"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 327251635691520
+    m_Localized: Oscuridad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 327477054365696
+    m_Localized: Reflexiones
+    m_Metadata:
+      m_Items: []
+  - m_Id: 327703379009536
+    m_Localized: "Oclusi\xF3n ambiental"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 328616026005504
+    m_Localized: Mundo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 328648338923520
+    m_Localized: Efectos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 328678269476864
+    m_Localized: "M\xFAsica"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 329244634734592
+    m_Localized: Texto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 329268491935744
+    m_Localized: Discurso
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

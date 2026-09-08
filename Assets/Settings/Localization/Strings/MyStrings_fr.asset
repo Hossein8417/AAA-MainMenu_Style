@@ -1,0 +1,270 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: MyStrings_fr
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: 740b0a5878eaae64ca7524447c698174, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 300403384320
+    m_Localized: Appuyez sur n'importe quelle touche
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020756992000
+    m_Localized: Histoire
+    m_Metadata:
+      m_Items: []
+  - m_Id: 294742641336320
+    m_Localized: Supplements
+    m_Metadata:
+      m_Items: []
+  - m_Id: 294994429599744
+    m_Localized: Possibilites
+    m_Metadata:
+      m_Items: []
+  - m_Id: 295315109306368
+    m_Localized: Quitter vers le bureau
+    m_Metadata:
+      m_Items: []
+  - m_Id: 296333519872000
+    m_Localized: "s\xE9lectionner"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 297881990815744
+    m_Localized: Dos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 297890278760448
+    m_Localized: Nouvelle partie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 297893768421376
+    m_Localized: Charger la partie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 297898600259584
+    m_Localized: "Choisissez n'importe quel emplacement pour enregistrer les donn\xE9es
+      de votre nouvelle partie !"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 297981177716736
+    m_Localized: "Mode D\xE9fi :"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 300396396371968
+    m_Localized: Progression (0 %)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 300632313389056
+    m_Localized: 'Date et heure :'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 301406145699840
+    m_Localized: Choisissez un emplacement de sauvegarde pour continuer votre partie.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 302598871539712
+    m_Localized: "Cr\xE9dits"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 303809846796288
+    m_Localized: Gameplay
+    m_Metadata:
+      m_Items: []
+  - m_Id: 303850481213440
+    m_Localized: Commandes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 303885549789184
+    m_Localized: Assignations des touches
+    m_Metadata:
+      m_Items: []
+  - m_Id: 303932320473088
+    m_Localized: Afficher
+    m_Metadata:
+      m_Items: []
+  - m_Id: 304007918608384
+    m_Localized: "Graphismes avanc\xE9s"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 304046439096320
+    m_Localized: Audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 304081507672064
+    m_Localized: Langue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 316994255544320
+    m_Localized: Quitter vers le bureau ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 317296140574720
+    m_Localized: Oui
+    m_Metadata:
+      m_Items: []
+  - m_Id: 317487673466880
+    m_Localized: Non
+    m_Metadata:
+      m_Items: []
+  - m_Id: 318175535128576
+    m_Localized: "Niveau de difficult\xE9"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 318498999853056
+    m_Localized: Sous-titres
+    m_Metadata:
+      m_Items: []
+  - m_Id: 318848637034496
+    m_Localized: Astuce de jeu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 319034830577664
+    m_Localized: Tutoriels
+    m_Metadata:
+      m_Items: []
+  - m_Id: 319264275783680
+    m_Localized: Mode photo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320011298103296
+    m_Localized: Souris
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320063475245056
+    m_Localized: "Cam\xE9ra"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320095121268736
+    m_Localized: le combinateur
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320938172178432
+    m_Localized: "Sensibilit\xE9 de la souris"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320990550646784
+    m_Localized: "Sensibilit\xE9 de la cam\xE9ra"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 321064806604800
+    m_Localized: "Sensibilit\xE9 de la manette"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322079257747456
+    m_Localized: Rapport d'aspect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322122907869184
+    m_Localized: "R\xE9solution"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322165928845312
+    m_Localized: Autre
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322234950311936
+    m_Localized: Afficher
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322293066588160
+    m_Localized: V-Sync
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322369402920960
+    m_Localized: "R\xE9solution d'affichage"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322422922240000
+    m_Localized: GPU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322473119670272
+    m_Localized: Appliquer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322501640937472
+    m_Localized: "R\xE9initialiser"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 323939985219584
+    m_Localized: "Des r\xE9solutions plus \xE9lev\xE9es produiront des ombres plus
+      nettes et de meilleure qualit\xE9.\r\nDes param\xE8tres plus \xE9lev\xE9s auront
+      un impact sur les performances du GPU."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 324059841650688
+    m_Localized: "Utilisation estim\xE9e :"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 324429343055872
+    m_Localized: total
+    m_Metadata:
+      m_Items: []
+  - m_Id: 324646205349888
+    m_Localized: Video Memory (VRAM)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 326561156784128
+    m_Localized: "Pr\xE9r\xE9glage"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 326815360966656
+    m_Localized: Textures
+    m_Metadata:
+      m_Items: []
+  - m_Id: 326963034021888
+    m_Localized: "Qualit\xE9 du mod\xE8le"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 327117019504640
+    m_Localized: Filtrage anisotrope
+    m_Metadata:
+      m_Items: []
+  - m_Id: 327251635691520
+    m_Localized: faire filer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 327477054365696
+    m_Localized: "R\xE9flexions"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 327703379009536
+    m_Localized: Occlusion ambiante
+    m_Metadata:
+      m_Items: []
+  - m_Id: 328616026005504
+    m_Localized: Monde
+    m_Metadata:
+      m_Items: []
+  - m_Id: 328648338923520
+    m_Localized: Effets
+    m_Metadata:
+      m_Items: []
+  - m_Id: 328678269476864
+    m_Localized: Musique
+    m_Metadata:
+      m_Items: []
+  - m_Id: 329244634734592
+    m_Localized: Texte
+    m_Metadata:
+      m_Items: []
+  - m_Id: 329268491935744
+    m_Localized: Discours
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

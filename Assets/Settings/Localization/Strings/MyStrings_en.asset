@@ -1,0 +1,268 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: MyStrings_en
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 740b0a5878eaae64ca7524447c698174, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 300403384320
+    m_Localized: Press Any Key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020756992000
+    m_Localized: Story
+    m_Metadata:
+      m_Items: []
+  - m_Id: 294742641336320
+    m_Localized: Extras
+    m_Metadata:
+      m_Items: []
+  - m_Id: 294994429599744
+    m_Localized: Options
+    m_Metadata:
+      m_Items: []
+  - m_Id: 295315109306368
+    m_Localized: Quit to desktop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 296333519872000
+    m_Localized: Select
+    m_Metadata:
+      m_Items: []
+  - m_Id: 297881990815744
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 297890278760448
+    m_Localized: New Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 297893768421376
+    m_Localized: LoadGame
+    m_Metadata:
+      m_Items: []
+  - m_Id: 297898600259584
+    m_Localized: Choose any slot to write your new game data !
+    m_Metadata:
+      m_Items: []
+  - m_Id: 297981177716736
+    m_Localized: 'Challange Mode:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 300396396371968
+    m_Localized: Progress (0%)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 300632313389056
+    m_Localized: 'Date & Time:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 301406145699840
+    m_Localized: Choose saved slot to continue your game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 302598871539712
+    m_Localized: Credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 303809846796288
+    m_Localized: Gameplay
+    m_Metadata:
+      m_Items: []
+  - m_Id: 303850481213440
+    m_Localized: Controls
+    m_Metadata:
+      m_Items: []
+  - m_Id: 303885549789184
+    m_Localized: Key Bindings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 303932320473088
+    m_Localized: Display
+    m_Metadata:
+      m_Items: []
+  - m_Id: 304007918608384
+    m_Localized: Advanced Graphics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 304046439096320
+    m_Localized: Audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 304081507672064
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 316994255544320
+    m_Localized: Quit to Desktop?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 317296140574720
+    m_Localized: Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 317487673466880
+    m_Localized: No
+    m_Metadata:
+      m_Items: []
+  - m_Id: 318175535128576
+    m_Localized: Challange Level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 318498999853056
+    m_Localized: Subtitles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 318848637034496
+    m_Localized: Game Hint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 319034830577664
+    m_Localized: Tutorials
+    m_Metadata:
+      m_Items: []
+  - m_Id: 319264275783680
+    m_Localized: Photo mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320011298103296
+    m_Localized: Mouse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320063475245056
+    m_Localized: Camera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320095121268736
+    m_Localized: Controller
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320938172178432
+    m_Localized: Mouse Sensitivity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320990550646784
+    m_Localized: Camera Sensitivity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 321064806604800
+    m_Localized: Controller Sensitivity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322079257747456
+    m_Localized: Aspect Ratio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322122907869184
+    m_Localized: Resolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322165928845312
+    m_Localized: Other
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322234950311936
+    m_Localized: Display
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322293066588160
+    m_Localized: V-Sync
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322369402920960
+    m_Localized: Display Resolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322422922240000
+    m_Localized: GPU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322473119670272
+    m_Localized: Apply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322501640937472
+    m_Localized: Reset
+    m_Metadata:
+      m_Items: []
+  - m_Id: 323939985219584
+    m_Localized: "Higher Resolutions will results in sharper,\nHigher quality shadows.
+      \nHigher settings will impact GPU performance."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 324059841650688
+    m_Localized: 'Estimated Usage:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 324429343055872
+    m_Localized: 'Total:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 324646205349888
+    m_Localized: Video Memory (VRAM)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 326561156784128
+    m_Localized: Preset
+    m_Metadata:
+      m_Items: []
+  - m_Id: 326815360966656
+    m_Localized: 'Textures '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 326963034021888
+    m_Localized: 'Model Quality '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 327117019504640
+    m_Localized: 'Anisotropic Filter '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 327251635691520
+    m_Localized: 'Shadows '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 327477054365696
+    m_Localized: 'Reflections  '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 327703379009536
+    m_Localized: 'Ambient Occlusion '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 328616026005504
+    m_Localized: World
+    m_Metadata:
+      m_Items: []
+  - m_Id: 328648338923520
+    m_Localized: Effects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 328678269476864
+    m_Localized: Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 329244634734592
+    m_Localized: Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 329268491935744
+    m_Localized: Speech
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

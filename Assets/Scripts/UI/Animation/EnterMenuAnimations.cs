@@ -11,7 +11,6 @@ public class EnterMenuAnimations : MonoBehaviour
 
     private Tween blinkTween;
     
-
     void Awake()
     {
         if (manager != null) StartBlinking();

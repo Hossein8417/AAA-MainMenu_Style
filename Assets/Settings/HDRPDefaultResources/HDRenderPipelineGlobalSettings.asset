@@ -309,24 +309,24 @@ MonoBehaviour:
         m_Version: 0
         m_Camera:
           bitDatas:
-            data1: 72198260625768269
-            data2: 13799031439032811544
+            data1: 72198260625637199
+            data2: 13799031438762934296
           lodBias: 1
-          lodBiasMode: 0
-          lodBiasQualityLevel: 0
+          lodBiasMode: 1
+          lodBiasQualityLevel: 2
           maximumLODLevel: 0
           maximumLODLevelMode: 0
-          maximumLODLevelQualityLevel: 0
-          sssQualityMode: 0
-          sssQualityLevel: 0
+          maximumLODLevelQualityLevel: 2
+          sssQualityMode: 1
+          sssQualityLevel: 2
           sssCustomSampleBudget: 20
           sssCustomDownsampleSteps: 0
-          msaaMode: 1
+          msaaMode: 4
           materialQuality: 0
         m_CustomOrBakedReflection:
           bitDatas:
             data1: 135310754214733
-            data2: 4539628428684460056
+            data2: 4539628463044198424
           lodBias: 1
           lodBiasMode: 0
           lodBiasQualityLevel: 0

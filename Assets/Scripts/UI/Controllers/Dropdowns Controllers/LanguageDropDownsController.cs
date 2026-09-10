@@ -2,9 +2,12 @@ using System.Collections.Generic;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Localization;
 using UnityEngine;
+using TMPro;
 
 public class LanguageDropDownsController : MonoBehaviour
 {
+    [Header("References")]
+
     [SerializeField]
     private UIManager manager;
 
@@ -22,14 +25,13 @@ public class LanguageDropDownsController : MonoBehaviour
     [SerializeField]
     private string defaultLanguageLocale;
 
-
-
     private List<Locale> availableLocals = new List<Locale>();
+
     private void Awake()
     {
-        TextLanguageSettings();
-        SubtitlesLanguageSettings();
-        SpeechLanguageSettings();
+        DropDownsSettings<TextLanguages>(manager.refrences.TextDropdown);
+        DropDownsSettings<SubtitlesLanguages>(manager.refrences.LanguageSubtitlesDropdown);
+        DropDownsSettings<SpeechLanguages>(manager.refrences.SpeechDropdown);
 
         LanguageListeners();
     }
@@ -40,45 +42,19 @@ public class LanguageDropDownsController : MonoBehaviour
     }
 
     #region LoadDefaultValues
-    private void LoadDefaultTextLan() {
-        int savedLanguage = PlayerPrefs.GetInt(GameData.TEXT_LANGUAGE, (int)defaultTextLan);
-        
+    private void LoadDefaultLanguage<T>(TMP_Dropdown dropdown, string prefId, int defualtIntegerValue) where T : System.Enum
+    {
+        int savedLanguage = PlayerPrefs.GetInt(prefId, defualtIntegerValue);
 
-        if (savedLanguage < 0 ||savedLanguage >= System.Enum.GetValues(typeof(TextLanguages)).Length)
+        if (savedLanguage < 0 || savedLanguage >= System.Enum.GetValues(typeof(T)).Length)
         {
-            manager.refrences.TextDropdown.value = (int)defaultTextLan;
-            manager.refrences.TextDropdown.RefreshShownValue();
+            dropdown.value = defualtIntegerValue;
+            dropdown.RefreshShownValue();
         }
         else
         {
-            manager.refrences.TextDropdown.value = savedLanguage;
-            manager.refrences.TextDropdown.RefreshShownValue();
-        }
-    }
-    private void LoadDefaultSubtitlesLan() {
-        int savedLanguage = PlayerPrefs.GetInt(GameData.SUBTITLES_LANGUAGE, (int)defaultSubtitlesLan);
-        if (savedLanguage < 0 || savedLanguage >= System.Enum.GetValues(typeof(SubtitlesLanguages)).Length)
-        {
-            manager.refrences.LanguageSubtitlesDropdown.value = (int)defaultSubtitlesLan;
-            manager.refrences.LanguageSubtitlesDropdown.RefreshShownValue();
-        }
-        else
-        {
-            manager.refrences.LanguageSubtitlesDropdown.value = savedLanguage;
-            manager.refrences.LanguageSubtitlesDropdown.RefreshShownValue();
-        }
-    }
-    private void LoadDefaultSpeechLan() {
-        int savedLanguage = PlayerPrefs.GetInt(GameData.SPEECH_LANGUAGE, (int)defaultSpeechLan);
-        if (savedLanguage < 0 || savedLanguage >= System.Enum.GetValues(typeof(SpeechLanguages)).Length)
-        {
-            manager.refrences.SpeechDropdown.value = (int)defaultSpeechLan;
-            manager.refrences.SpeechDropdown.RefreshShownValue();
-        }
-        else
-        {
-            manager.refrences.SpeechDropdown.value = savedLanguage;
-            manager.refrences.SpeechDropdown.RefreshShownValue();
+            dropdown.value = savedLanguage;
+            dropdown.RefreshShownValue();
         }
     }
     private void LoadDefaultGameLanguage()
@@ -108,11 +84,6 @@ public class LanguageDropDownsController : MonoBehaviour
     #endregion
 
     #region General
-    private void LoadData() {
-        LoadDefaultTextLan();
-        LoadDefaultSubtitlesLan();
-        LoadDefaultSpeechLan();
-    }
 
     private void LanguageListeners() {
         manager.refrences.TextDropdown.onValueChanged.AddListener(OnTextLanChanged);
@@ -127,9 +98,24 @@ public class LanguageDropDownsController : MonoBehaviour
         availableLocals = LocalizationSettings.AvailableLocales.Locales;
 
         LoadDefaultGameLanguage();
-        LoadData();
+        LoadDefaultLanguage<TextLanguages>(manager.refrences.TextDropdown, GameData.TEXT_LANGUAGE, (int)defaultTextLan);
+        LoadDefaultLanguage<SubtitlesLanguages>(manager.refrences.LanguageSubtitlesDropdown, GameData.SUBTITLES_LANGUAGE, (int)defaultSubtitlesLan);
+        LoadDefaultLanguage<SpeechLanguages>(manager.refrences.SpeechDropdown, GameData.SPEECH_LANGUAGE, (int)defaultSpeechLan);
     }
 
+    private void DropDownsSettings<T>(TMP_Dropdown dropdown) where T : System.Enum
+    {
+        dropdown.ClearOptions();
+
+        List<string> options = new List<string>();
+
+        foreach (T item in System.Enum.GetValues(typeof(T)))
+        {
+            options.Add(item.ToString());
+        }
+
+        dropdown.AddOptions(options);
+    }
     private void ChangeLanguage(int index)
     {
         if (index < 0 || index >= availableLocals.Count)
@@ -156,58 +142,13 @@ public class LanguageDropDownsController : MonoBehaviour
     }
 
     private void OnSubtitlesLanChanged(int index) {
-        //SubtitlesLanguages lan set to value 
         PlayerPrefs.SetInt(GameData.SUBTITLES_LANGUAGE, index);
         PlayerPrefs.Save();
     }
 
     private void OnSpeechLanChanged(int index) {
-        //speech lan set to value
         PlayerPrefs.SetInt(GameData.SPEECH_LANGUAGE, index);
         PlayerPrefs.Save();
     }
     #endregion
-
-    #region Settings
-    private void TextLanguageSettings() { 
-        manager.refrences.TextDropdown.ClearOptions();
-
-        List<string> options = new List<string>();
-
-        foreach (TextLanguages languages in System.Enum.GetValues(typeof(TextLanguages)))
-        {
-            options.Add(languages.ToString());
-        }
-
-        manager.refrences.TextDropdown.AddOptions(options);
-    }
-
-    private void SubtitlesLanguageSettings() {
-
-        manager.refrences.LanguageSubtitlesDropdown.ClearOptions();
-
-        List<string> options = new List<string>();
-
-        foreach (SubtitlesLanguages languages in System.Enum.GetValues(typeof(SubtitlesLanguages)))
-        {
-            options.Add(languages.ToString());
-        }
-
-        manager.refrences.LanguageSubtitlesDropdown.AddOptions(options);
-    }
-
-    private void SpeechLanguageSettings() {
-
-        manager.refrences.SpeechDropdown.ClearOptions();
-
-        List<string> options = new List<string>();
-
-        foreach (SpeechLanguages languages in System.Enum.GetValues(typeof(SpeechLanguages)))
-        {
-            options.Add(languages.ToString());
-        }
-
-        manager.refrences.SpeechDropdown.AddOptions(options);
-    }
-    #endregion   
 }

@@ -11,12 +11,9 @@ public class GameplayMenu : IState
 
     public void Show()
     {
-        if (Manager == null)
-        {
-            Debug.LogError("Cant access to ui manager from Gameplay menu");
-            return;
-        }
-        Manager.panelsController.PanelActiver(Manager.refrences.GameplayPanel, true);
+        if (Manager == null) return;
+
+        PanelsController.Instance.PanelActiver(Manager.refrences.GameplayPanel, true);
     }
     public void UpdateState()
     {
@@ -24,7 +21,7 @@ public class GameplayMenu : IState
     }
     public void Hide()
     {
-        Manager.panelsController.PanelActiver(Manager.refrences.GameplayPanel, false);
+        PanelsController.Instance.PanelActiver(Manager.refrences.GameplayPanel, false);
     }
     public void CheckInput()
     {

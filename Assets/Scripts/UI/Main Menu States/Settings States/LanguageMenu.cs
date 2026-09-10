@@ -12,12 +12,9 @@ public class LanguageMenu : IState
 
     public void Show()
     {
-        if (Manager == null)
-        {
-            Debug.LogError("Cant access to ui manager from Language menu");
-            return;
-        }
-        Manager.panelsController.PanelActiver(Manager.refrences.LanguagePanel, true);
+        if (Manager == null) return;
+
+        PanelsController.Instance.PanelActiver(Manager.refrences.LanguagePanel, true);
     }
     public void UpdateState()
     {
@@ -25,7 +22,7 @@ public class LanguageMenu : IState
     }
     public void Hide()
     {
-        Manager.panelsController.PanelActiver(Manager.refrences.LanguagePanel, false);
+        PanelsController.Instance.PanelActiver(Manager.refrences.LanguagePanel, false);
     }
     public void CheckInput()
     {

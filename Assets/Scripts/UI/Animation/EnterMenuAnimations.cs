@@ -30,11 +30,8 @@ public class EnterMenuAnimations : MonoBehaviour
             blinkTween.Kill();
             blinkTween = null;
         }
-
-       
         manager.refrences.EnterText.DOFade(1f, 0.1f);
     }
-
     void OnDestroy()
     {
         StopBlinking();

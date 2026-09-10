@@ -1,5 +1,6 @@
+using TMPro;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class AudioSlidersControllers : MonoBehaviour
 {
     [SerializeField]
@@ -30,11 +31,25 @@ public class AudioSlidersControllers : MonoBehaviour
         worldAudio.Play();
         musicAudio.Play();
 
-        WorldVolumeSettings();
-        EffectsVolumeSettings();
-        MusicVolumeSettings();
+        AudiosSliderSettingsSetter(manager.refrences.WorldSlider, 0.0f, 100.0f, true);
+        AudiosSliderSettingsSetter(manager.refrences.EffectsSlider, 0.0f, 100.0f, true);
+        AudiosSliderSettingsSetter(manager.refrences.MusicSlider, 0.0f, 100.0f, true);
 
-        LoadData();
+        LoadData(manager.refrences.WorldSlider,
+            manager.refrences.WorldValueText,
+            worldAudio,
+            GameData.WORLD_AUDIO, (int)defaultWorldAudioVolume);
+
+        LoadData(manager.refrences.EffectsSlider,
+            manager.refrences.EffectsValueText, 
+            effectsAudio,
+            GameData.EFFECTS_AUDIO, (int)defaultEffectsAudioVolume);
+
+        LoadData(manager.refrences.MusicSlider,
+            manager.refrences.MusicValueText, 
+            musicAudio,
+            GameData.MUSIC_AUDIO, (int)defaultMusicAudioVolume);
+
 
         ListenToSliders();
     }
@@ -44,57 +59,6 @@ public class AudioSlidersControllers : MonoBehaviour
         musicAudio.Stop();
     }
 
-    #region LoadDefaultSettings
-    private void LoadDefaultWorldAudioVolume()
-    {
-        float savedValue = PlayerPrefs.GetFloat(GameData.WORLD_AUDIO, defaultWorldAudioVolume);
-        if (savedValue > 100.0f || savedValue < 0)
-        {
-            worldAudio.volume = defaultWorldAudioVolume / 100;
-            manager.refrences.WorldSlider.value = defaultWorldAudioVolume;
-            manager.refrences.WorldValueText.text = defaultWorldAudioVolume.ToString();
-        }
-        else
-        {
-            worldAudio.volume = savedValue / 100;
-            manager.refrences.WorldSlider.value = savedValue;
-            manager.refrences.WorldValueText.text = savedValue.ToString();
-        }
-
-    }
-    private void LoadDefaultEffectsAudioVolume()
-    {
-        float savedValue = PlayerPrefs.GetFloat(GameData.EFFECTS_AUDIO, defaultEffectsAudioVolume);
-        if (savedValue > 100.0f || savedValue < 0)
-        {
-            effectsAudio.volume = defaultEffectsAudioVolume / 100;
-            manager.refrences.EffectsSlider.value = defaultEffectsAudioVolume;
-            manager.refrences.EffectsValueText.text = defaultEffectsAudioVolume.ToString();
-        }
-        else
-        {
-            effectsAudio.volume = savedValue / 100;
-            manager.refrences.EffectsSlider.value = savedValue;
-            manager.refrences.EffectsValueText.text = savedValue.ToString();
-        }
-    }
-    private void LoadDefaultMusicAudioVolume()
-    {
-        float savedValue = PlayerPrefs.GetFloat(GameData.MUSIC_AUDIO, defaultMusicAudioVolume);
-        if (savedValue > 100.0f || savedValue < 0)
-        {
-            musicAudio.volume = defaultMusicAudioVolume / 100;
-            manager.refrences.MusicSlider.value = defaultMusicAudioVolume;
-            manager.refrences.MusicValueText.text = defaultMusicAudioVolume.ToString();
-        }
-        else
-        {
-            musicAudio.volume = savedValue / 100;
-            manager.refrences.MusicSlider.value = savedValue;
-            manager.refrences.MusicValueText.text = savedValue.ToString();
-        }
-    }
-    #endregion 
 
     #region OnValuesChanged Methods
     public void OnWorldAudioVolumeChanged(float value)
@@ -124,27 +88,6 @@ public class AudioSlidersControllers : MonoBehaviour
     }
     #endregion
 
-    #region Settings
-    public void WorldVolumeSettings()
-    {
-        manager.refrences.WorldSlider.minValue = 0.0f;
-        manager.refrences.WorldSlider.maxValue = 100.0f;
-        manager.refrences.WorldSlider.wholeNumbers = true;
-    }
-    public void EffectsVolumeSettings()
-    {
-        manager.refrences.EffectsSlider.minValue = 0.0f;
-        manager.refrences.EffectsSlider.maxValue = 100.0f;
-        manager.refrences.EffectsSlider.wholeNumbers = true;
-    }
-    public void MusicVolumeSettings()
-    {
-        manager.refrences.MusicSlider.minValue = 0.0f;
-        manager.refrences.MusicSlider.maxValue = 100.0f;
-        manager.refrences.MusicSlider.wholeNumbers = true;
-    }
-    #endregion
-
     #region General
     private void ListenToSliders()
     {
@@ -153,11 +96,27 @@ public class AudioSlidersControllers : MonoBehaviour
         manager.refrences.MusicSlider.onValueChanged.AddListener(OnMusicAudioVolumeChanged);
     }
 
-    private void LoadData()
+    private void AudiosSliderSettingsSetter(Slider slider, float minValue, float maxValue, bool isWholeNumber)
     {
-        LoadDefaultWorldAudioVolume();
-        LoadDefaultEffectsAudioVolume();
-        LoadDefaultMusicAudioVolume();
+        slider.minValue = minValue;
+        slider.maxValue = maxValue;
+        slider.wholeNumbers = true;
+    }
+    private void LoadData(Slider slider, TMP_Text text, AudioSource audioSource,string prefId, int value)
+    {
+        float savedValue = PlayerPrefs.GetFloat(prefId, value);
+        if (savedValue > 100.0f || savedValue < 0)
+        {
+            audioSource.volume = value / 100;
+            slider.value = value;
+            text.text = value.ToString();
+        }
+        else
+        {
+            audioSource.volume = savedValue / 100;
+            slider.value = savedValue;
+            text.text = savedValue.ToString();
+        }
     }
     #endregion
 }

@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControlsSliders : MonoBehaviour
 {
@@ -18,61 +21,19 @@ public class ControlsSliders : MonoBehaviour
 
     private void Awake()
     {
-        MouseValueSettings();
-        CameraValueSettings();
-        ControllerValueSettings();
+        ControlsSliderSettingsSetter(manager.refrences.MouseSenitivity, 0.0f, 100.0f, true);
+        ControlsSliderSettingsSetter(manager.refrences.CameraSenitivity, 0.0f, 100.0f, true);
+        ControlsSliderSettingsSetter(manager.refrences.ControllerSenitivity, 0.0f, 100.0f, true);
 
-        LoadData();
+        LoadData(manager.refrences.MouseSenitivity,
+            manager.refrences.MouseSenitivityValueText, GameData.MOUSE_SENTIVITY_VALUE, (int)defaultMouseSentivityValue);
+        LoadData(manager.refrences.CameraSenitivity,
+            manager.refrences.CameraSenitivityValueText, GameData.CAMERA_SENTIVITY_VALUE, (int)defaultCameraSentivityValue);
+        LoadData(manager.refrences.ControllerSenitivity,
+            manager.refrences.ControllerSenitivityValueText, GameData.CONTROLLER_SENTIVITY_VALUE, (int)defaultControllerSentivityValue);
 
         ListenToSliders();
     }
-
-
-    #region LoadDefaultSettings
-    private void LoadDefaultMouseSentivityValue()
-    {
-        float savedValue = PlayerPrefs.GetFloat(GameData.MOUSE_SENTIVITY_VALUE, defaultMouseSentivityValue);
-        if (savedValue > 100.0f || savedValue < 0)
-        {
-            manager.refrences.MouseSenitivity.value = defaultMouseSentivityValue;
-            manager.refrences.MouseSenitivityValueText.text = defaultMouseSentivityValue.ToString();
-        }
-        else
-        { 
-            manager.refrences.MouseSenitivity.value = savedValue;
-            manager.refrences.MouseSenitivityValueText.text = savedValue.ToString();
-        }
-
-    }
-    private void LoadDefaultCameraSentivityValue()
-    {
-        float savedValue = PlayerPrefs.GetFloat(GameData.CAMERA_SENTIVITY_VALUE, defaultCameraSentivityValue);
-        if (savedValue > 100.0f || savedValue < 0)
-        {
-            manager.refrences.CameraSenitivity.value = defaultCameraSentivityValue;
-            manager.refrences.CameraSenitivityValueText.text = defaultCameraSentivityValue.ToString();
-        }
-        else
-        {
-            manager.refrences.CameraSenitivity.value = savedValue;
-            manager.refrences.CameraSenitivityValueText.text = savedValue.ToString();
-        }
-    }
-    private void LoadDefaultControllerSentivityValue()
-    {
-        float savedValue = PlayerPrefs.GetFloat(GameData.CONTROLLER_SENTIVITY_VALUE, defaultControllerSentivityValue);
-        if (savedValue > 100.0f || savedValue < 0)
-        {
-            manager.refrences.ControllerSenitivity.value = defaultControllerSentivityValue;
-            manager.refrences.ControllerSenitivityValueText.text = defaultControllerSentivityValue.ToString();
-        }
-        else
-        {
-            manager.refrences.ControllerSenitivity.value = savedValue;
-            manager.refrences.ControllerSenitivityValueText.text = savedValue.ToString();
-        }
-    }
-    #endregion 
 
     #region OnValuesChanged Methods
     public void OnMouseSentivityValueChanged(float value)
@@ -96,27 +57,6 @@ public class ControlsSliders : MonoBehaviour
     }
     #endregion
 
-    #region Settings
-    public void MouseValueSettings()
-    {
-        manager.refrences.MouseSenitivity.minValue = 0.0f;
-        manager.refrences.MouseSenitivity.maxValue = 100.0f;
-        manager.refrences.MouseSenitivity.wholeNumbers = true;
-    }
-    public void CameraValueSettings()
-    {
-        manager.refrences.CameraSenitivity.minValue = 0.0f;
-        manager.refrences.CameraSenitivity.maxValue = 100.0f;
-        manager.refrences.CameraSenitivity.wholeNumbers = true;
-    }
-    public void ControllerValueSettings()
-    {
-        manager.refrences.ControllerSenitivity.minValue = 0.0f;
-        manager.refrences.ControllerSenitivity.maxValue = 100.0f;
-        manager.refrences.ControllerSenitivity.wholeNumbers = true;
-    }
-    #endregion
-
     #region General
     private void ListenToSliders()
     {
@@ -124,12 +64,25 @@ public class ControlsSliders : MonoBehaviour
         manager.refrences.CameraSenitivity.onValueChanged.AddListener(OnCameraSentivityValueChanged);
         manager.refrences.ControllerSenitivity.onValueChanged.AddListener(OnControllerSentivityValueChanged);
     }
-
-    private void LoadData()
+    private void ControlsSliderSettingsSetter(Slider slider, float minValue, float maxValue, bool isWholeNumber)
     {
-        LoadDefaultMouseSentivityValue();
-        LoadDefaultCameraSentivityValue();
-        LoadDefaultControllerSentivityValue();
+        slider.minValue = minValue;
+        slider.maxValue = maxValue;
+        slider.wholeNumbers = true;
+    }
+    private void LoadData(Slider slider, TMP_Text text, string prefId, int value)
+    {
+        float savedValue = PlayerPrefs.GetFloat(prefId, value);
+        if (savedValue > 100.0f || savedValue < 0)
+        {
+            slider.value = value;
+            text.text = value.ToString();
+        }
+        else
+        {
+            slider.value = savedValue;
+            text.text = savedValue.ToString();
+        }
     }
     #endregion
 }

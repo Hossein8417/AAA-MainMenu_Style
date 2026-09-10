@@ -32,7 +32,6 @@ public class MainMenuAnimation : MonoBehaviour, IPointerEnterHandler, IPointerEx
         currentTween?.Kill();
         currentTween = transform.DOScale(originalScale, duration).SetEase(easeType).SetUpdate(true);
     }
-
     void OnDestroy()
     {
         currentTween?.Kill();

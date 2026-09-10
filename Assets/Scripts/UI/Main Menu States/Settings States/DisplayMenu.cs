@@ -11,12 +11,9 @@ public class DisplayMenu : IState
 
     public void Show()
     {
-        if (Manager == null)
-        {
-            Debug.LogError("Cant access to ui manager from Display menu");
-            return;
-        }
-        Manager.panelsController.PanelActiver(Manager.refrences.DisplayPanel, true);
+        if (Manager == null) return;
+
+        PanelsController.Instance.PanelActiver(Manager.refrences.DisplayPanel, true);
     }
     public void UpdateState()
     {
@@ -24,7 +21,7 @@ public class DisplayMenu : IState
     }
     public void Hide()
     {
-        Manager.panelsController.PanelActiver(Manager.refrences.DisplayPanel, false);
+        PanelsController.Instance.PanelActiver(Manager.refrences.DisplayPanel, false);
     }
     public void CheckInput()
     {

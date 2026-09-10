@@ -21,8 +21,6 @@ public class DisplayDropdowns : MonoBehaviour
     private void LoadDefualtDisplayResolution() {
         if (!PlayerPrefs.HasKey(GameData.DISPLAY_RESOLUTION))
         {
-            //default resolution
-
             int screenWidth = 1280;
             int screenHeight = 720;
             int defaultResolutionIndex = 3;
@@ -43,7 +41,6 @@ public class DisplayDropdowns : MonoBehaviour
     #region OnValuesChanged
     private void OnDisplayResolutionChanged(int index)
     {
-        Debug.Log($"display reslotion changed to {index}");
         ApplyDisplayResolution(index);
         PlayerPrefs.SetInt(GameData.DISPLAY_RESOLUTION, index);
     }
@@ -59,26 +56,20 @@ public class DisplayDropdowns : MonoBehaviour
         manager.refrences.DisplayResolutionDropdown.onValueChanged.AddListener(OnDisplayResolutionChanged);
         manager.refrences.DisplayMonitorDropdown.onValueChanged.AddListener(OnMonitorChanged);
     }
-
     private void GetUserGPUInfo()
     {
         string gpuName = SystemInfo.graphicsDeviceName;
         manager.refrences.gpuNameText.text = gpuName;
     }
-
     private void LoadData() {
         LoadDefualtDisplayResolution();
     }
-
     private void ApplyDisplayResolution(int index)
     {
         Resolution res = displayResolutions[index];
 
         Screen.SetResolution(res.width, res.height, Screen.fullScreenMode);
     }
-    
-    
-
     #endregion
 
     #region SettingsOptions

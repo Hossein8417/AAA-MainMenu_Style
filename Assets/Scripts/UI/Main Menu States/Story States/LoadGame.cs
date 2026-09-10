@@ -11,12 +11,9 @@ public class LoadGame : IState
 
     public void Show()
     {
-        if (Manager == null)
-        {
-            Debug.LogError("Cant access to ui manager from LoadGame menu");
-            return;
-        }
-        Manager.panelsController.PanelActiver(Manager.refrences.LoadGamePanel, true);
+        if (Manager == null) return;
+
+        PanelsController.Instance.PanelActiver(Manager.refrences.LoadGamePanel, true);
     }
     public void UpdateState()
     {
@@ -24,7 +21,7 @@ public class LoadGame : IState
     }
     public void Hide()
     {
-        Manager.panelsController.PanelActiver(Manager.refrences.LoadGamePanel, false);
+        PanelsController.Instance.PanelActiver(Manager.refrences.LoadGamePanel, false);
     }
     public void CheckInput()
     {

@@ -10,12 +10,9 @@ public class CreditsMenu : IState
 
     public void Show()
     {
-        if (Manager == null)
-        {
-            Debug.LogError("Cant access to ui manager from Credits menu");
-            return;
-        }
-        Manager.panelsController.PanelActiver(Manager.refrences.CreditsPanel, true);
+        if (Manager == null) return;
+
+        PanelsController.Instance.PanelActiver(Manager.refrences.CreditsPanel, true);
     }
     public void UpdateState()
     {
@@ -23,7 +20,7 @@ public class CreditsMenu : IState
     }
     public void Hide()
     {
-        Manager.panelsController.PanelActiver(Manager.refrences.CreditsPanel, false);
+        PanelsController.Instance.PanelActiver(Manager.refrences.CreditsPanel, false);
     }
     public void CheckInput()
     {

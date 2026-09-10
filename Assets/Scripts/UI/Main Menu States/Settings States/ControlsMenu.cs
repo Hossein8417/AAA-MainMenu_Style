@@ -11,12 +11,9 @@ public class ControlsMenu : IState
 
     public void Show()
     {
-        if (Manager == null)
-        {
-            Debug.LogError("Cant access to ui manager from Controls menu");
-            return;
-        }
-        Manager.panelsController.PanelActiver(Manager.refrences.ControlsPanel, true);
+        if (Manager == null) return;
+
+        PanelsController.Instance.PanelActiver(Manager.refrences.ControlsPanel, true);
     }
     public void UpdateState()
     {
@@ -24,7 +21,7 @@ public class ControlsMenu : IState
     }
     public void Hide()
     {
-        Manager.panelsController.PanelActiver(Manager.refrences.ControlsPanel, false);
+        PanelsController.Instance.PanelActiver(Manager.refrences.ControlsPanel, false);
     }
     public void CheckInput()
     {

@@ -5,7 +5,6 @@ public class GraphicsSliderController : MonoBehaviour
     [SerializeField]
     private UIManager manager;
 
-
     private void Update()
     {
         GraphicsMemoryDisplayer();

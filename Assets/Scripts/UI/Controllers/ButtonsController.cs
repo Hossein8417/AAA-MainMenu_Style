@@ -4,20 +4,82 @@ using UnityEngine.SceneManagement;
 
 public class ButtonsController : MonoBehaviour
 {
+    //buttons controller must separate in multi button constrollers
     [SerializeField]
     private UIManager manager;
-
     private void Awake()
     {
         LoadS1GameValues();
         LoadS2GameValues();
         LoadS3GameValues();
-    }
-    private void Start()
-    {
+
         AddButtonsListeners();
     }
     #region On Clicked Methods
+    public void OnCreditsButtonPressed()
+    {
+        manager.ChangeState(States.Credits);
+    }
+    public void OnQuitButtonClicked()
+    {
+        Application.Quit();
+    }
+    public void OnQuitButtonNotClicked()
+    {
+        manager.ChangeState(States.MainMenu);
+    }
+    public void OnNewGameButtonPressed()
+    {
+        manager.ChangeState(States.NewGame);
+    }
+    public void OnLoadGameButtonPressed()
+    {
+        manager.ChangeState(States.LoadGame);
+    }
+    public void OnControlsButtonPressed()
+    {
+        manager.ChangeState(States.Controls);
+    }
+    public void OnKeyBindingsButtonPressed()
+    {
+        manager.ChangeState(States.keyBindings);
+    }
+    public void OnDisplayButtonPressed()
+    {
+        manager.ChangeState(States.Display);
+    }
+    public void OnAdvancedGraphicsButtonPressed()
+    {
+        manager.ChangeState(States.Graphics);
+    }
+    public void OnAudioButtonPressed()
+    {
+        manager.ChangeState(States.Audio);
+    }
+    public void OnGameplayButtonPressed()
+    {
+        manager.ChangeState(States.Gameplay);
+    }
+    public void OnLanguageButtonPressed()
+    {
+        manager.ChangeState(States.Language);
+    }
+    public void OnStoryButtonPressed()
+    {
+        manager.ChangeState(States.StoryMenu);
+    }
+    public void OnExtrasButtonPressed()
+    {
+        manager.ChangeState(States.Extrasmenu);
+    }
+    public void OnOptionsButtonPressed()
+    {
+        manager.ChangeState(States.OptionsMenu);
+    }
+    public void OnQuitButtonPressed()
+    {
+        manager.ChangeState(States.QuitMenu);
+    }
     private void OnNewGame1Clicked() {
         GetInformationToButtons(manager.refrences.S1challangeText, manager.refrences.S1dateTimeText);
         SceneManager.LoadScene("Game");
@@ -48,17 +110,14 @@ public class ButtonsController : MonoBehaviour
     }
     private void OnDisplayApplyButtonClicked()
     {
-        Debug.Log("Saved");
         PlayerPrefs.Save();
     }
     private void OnGraphicsApplyButtonClicked() { 
-        Debug.Log("Saved");
         PlayerPrefs.Save();
     }
     //new logic for better gameplay quality : when input handler time has arrived must create a logic for if apply button not clicked,ui shows a panel that settings are not confirmed and etc .... 
     private void OnDisplayResetClicked()
     {
-        Debug.Log("Reseted!");
         PlayerPrefs.DeleteKey(GameData.DISPLAY_RESOLUTION);
         PlayerPrefs.DeleteKey(GameData.V_SYNC);
 
@@ -75,12 +134,8 @@ public class ButtonsController : MonoBehaviour
 
 
         PlayerPrefs.GetInt(GameData.V_SYNC, 1);
-
-
-
     }
     private void OnGraphicsResetClicked() {
-        Debug.Log("Graphics Reseted!");
         PlayerPrefs.DeleteKey(GameData.GRAPHICS_PRESET);
         PlayerPrefs.DeleteKey(GameData.MODEL_LEVEL);
         PlayerPrefs.DeleteKey(GameData.ANISITROPIC_FILTER);
@@ -146,6 +201,22 @@ public class ButtonsController : MonoBehaviour
     #region General Methods
     private void AddButtonsListeners()
     {
+        manager.refrences.CreditsButton.onClick.AddListener(OnCreditsButtonPressed);
+        manager.refrences.YesButton.onClick.AddListener(OnQuitButtonClicked);
+        manager.refrences.NoButton.onClick.AddListener(OnQuitButtonNotClicked);
+        manager.refrences.NewGameButton.onClick.AddListener(OnNewGameButtonPressed);
+        manager.refrences.LoadGameButton.onClick.AddListener(OnLoadGameButtonPressed);
+        manager.refrences.GameplayButton.onClick.AddListener(OnGameplayButtonPressed);
+        manager.refrences.ControlsButton.onClick.AddListener(OnControlsButtonPressed);
+        manager.refrences.keyBindingsButton.onClick.AddListener(OnKeyBindingsButtonPressed);
+        manager.refrences.DisplayButton.onClick.AddListener(OnDisplayButtonPressed);
+        manager.refrences.AdvancedGraphicsButton.onClick.AddListener(OnAdvancedGraphicsButtonPressed);
+        manager.refrences.AudioButton.onClick.AddListener(OnAudioButtonPressed);
+        manager.refrences.LanguageButton.onClick.AddListener(OnLanguageButtonPressed);
+        manager.refrences.StoryButton.onClick.AddListener(OnStoryButtonPressed);
+        manager.refrences.ExtrasButton.onClick.AddListener(OnExtrasButtonPressed);
+        manager.refrences.OptionsButton.onClick.AddListener(OnOptionsButtonPressed);
+        manager.refrences.QuitDesktopButton.onClick.AddListener(OnQuitButtonPressed);
         manager.refrences.Slot1NewGameButton.onClick.AddListener(OnNewGame1Clicked);
         manager.refrences.Slot2NewGameButton.onClick.AddListener(OnNewGame2Clicked);
         manager.refrences.Slot3NewGameButton.onClick.AddListener(OnNewGame3Clicked);
@@ -172,7 +243,6 @@ public class ButtonsController : MonoBehaviour
     }
     private void GetLoadInformationToButtons() {
         int savedChallange = PlayerPrefs.GetInt(GameData.CHALLANGE_MODE);
-        print($"Challange set to : {(ChallangeLevel)savedChallange}");
     }
     private void GetLoadValues(TMP_Text slotChallangeText, TMP_Text slotDataTimeText
         ,TMP_Text slotLoadChallangeText, TMP_Text slotLoadDataTimeText) {

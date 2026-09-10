@@ -11,12 +11,9 @@ public class AudioMenu : IState
 
     public void Show()
     {
-        if (Manager == null)
-        {
-            Debug.LogError("Cant access to ui manager from Audio menu");
-            return;
-        }
-        Manager.panelsController.PanelActiver(Manager.refrences.AudioPanel, true);
+        if (Manager == null) return;
+
+        PanelsController.Instance.PanelActiver(Manager.refrences.AudioPanel, true);
     }
     public void UpdateState()
     {
@@ -24,7 +21,7 @@ public class AudioMenu : IState
     }
     public void Hide()
     {
-        Manager.panelsController.PanelActiver(Manager.refrences.AudioPanel, false);
+        PanelsController.Instance.PanelActiver(Manager.refrences.AudioPanel, false);
     }
     public void CheckInput()
     {

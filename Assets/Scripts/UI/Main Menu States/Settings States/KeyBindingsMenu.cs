@@ -11,12 +11,9 @@ public class KeyBindingsMenu : IState
 
     public void Show()
     {
-        if (Manager == null)
-        {
-            Debug.LogError("Cant access to ui manager from Key Bindings menu");
-            return;
-        }
-        Manager.panelsController.PanelActiver(Manager.refrences.keyBindingsPanel, true);
+        if (Manager == null) return;
+
+        PanelsController.Instance.PanelActiver(Manager.refrences.keyBindingsPanel, true);
     }
     public void UpdateState()
     {
@@ -24,7 +21,7 @@ public class KeyBindingsMenu : IState
     }
     public void Hide()
     {
-        Manager.panelsController.PanelActiver(Manager.refrences.keyBindingsPanel, false);
+        PanelsController.Instance.PanelActiver(Manager.refrences.keyBindingsPanel, false);
     }
     public void CheckInput()
     {

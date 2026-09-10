@@ -10,21 +10,17 @@ public class ExtrasMenu : IState
 
     public void Show()
     {
-        if (Manager == null)
-        {
-            Debug.LogError("Cant access to ui manager from Extras menu");
-            return;
-        }
-        Manager.panelsController.PanelActiver(Manager.refrences.ExtrasPanel, true);
+        if (Manager == null) return;
+
+        PanelsController.Instance.PanelActiver(Manager.refrences.ExtrasPanel, true);
     }
     public void UpdateState()
     {
         CheckInput();
-        Manager.refrences.CreditsButton.onClick.AddListener(OnCreditsButtonPressed);
     }
     public void Hide()
     {
-        Manager.panelsController.PanelActiver(Manager.refrences.ExtrasPanel, false);
+        PanelsController.Instance.PanelActiver(Manager.refrences.ExtrasPanel, false);
     }
     public void CheckInput()
     {
@@ -32,9 +28,5 @@ public class ExtrasMenu : IState
         {
             Manager.ChangeState(States.MainMenu);
         }
-    }
-    public void OnCreditsButtonPressed()
-    {
-        Manager.ChangeState(States.Credits);
     }
 }

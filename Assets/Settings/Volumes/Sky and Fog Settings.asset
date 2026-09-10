@@ -1753,7 +1753,7 @@ MonoBehaviour:
     m_Value: 0
   cloudSimpleMode:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   m_CloudPreset:
     m_OverrideState: 1
     m_Value: 4
@@ -1984,7 +1984,7 @@ MonoBehaviour:
     m_Value: 0
   shadowResolution:
     m_OverrideState: 1
-    m_Value: 512
+    m_Value: 128
   shadowDistance:
     m_OverrideState: 1
     m_Value: 8000

@@ -1,36 +1,42 @@
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using System.Collections.Generic;
 
 public class GraphicsDropdowns : MonoBehaviour
 {
+
     #region References
 
-    [SerializeField]
-    private UIManager manager;
+    [SerializeField] private UIManager manager;
 
     [Header("Default Settings")]
-    [SerializeField]
-    private GraphicsPreset defaultPreset;
 
-    [SerializeField]
-    private TexturesLevel defaultTextureLevel;
+    [SerializeField] 
+    private GraphicsPreset defaultPreset = GraphicsPreset.Low;
 
-    [SerializeField]
-    private ModelQualityLevel defaultModelQualityLevel;
+    [SerializeField] 
+    private TexturesLevel defaultTextureLevel = TexturesLevel.Low;
 
-    [SerializeField]
-    private ShadowsLevel defaultShadowsLevel;
+    [SerializeField] 
+    private ModelQualityLevel defaultModelQualityLevel = ModelQualityLevel.Economy;
 
-    [SerializeField]
-    private ReflectionLevel defaultReflectionLevel;
+    [SerializeField] 
+    private ShadowsLevel defaultShadowsLevel = ShadowsLevel.Low;
 
-    [SerializeField]
-    private AmbientOcclusion defaultAO;
+    [SerializeField] 
+    private ReflectionLevel defaultReflectionLevel = ReflectionLevel.Low;
 
-    [SerializeField]
-    private AnisotropicFilterLevel defaultAnisitropicFilter; 
+    [SerializeField] 
+    private AmbientOcclusion defaultAO = AmbientOcclusion.Disabled;
+
+    [SerializeField] 
+    private AnisotropicFilterLevel defaultAnisitropicFilter = AnisotropicFilterLevel.Disabled;
+
     #endregion
+
+    private bool _isUpdatingFromPreset = false;
+
     private void Awake()
     {
         GraphicsOptions<GraphicsPreset>(manager.refrences.PresetDropdown);
@@ -41,59 +47,103 @@ public class GraphicsDropdowns : MonoBehaviour
         GraphicsOptions<ReflectionLevel>(manager.refrences.ReflectionsDropdown);
         GraphicsOptions<AmbientOcclusion>(manager.refrences.AmbientOcclusionDropdown);
 
-        LoadData<GraphicsPreset>(manager.refrences.PresetDropdown, GameData.GRAPHICS_PRESET, (int)defaultPreset);
-        LoadData<TexturesLevel>(manager.refrences.TexturesDropdown, GameData.TEXTURE_LEVEL, (int)defaultTextureLevel);
-        LoadData<ModelQualityLevel>(manager.refrences.ModelQualityDropdown, GameData.MODEL_LEVEL, (int)defaultModelQualityLevel);
-        LoadData<AnisotropicFilterLevel>(manager.refrences.AnistropicFilterDropdown, GameData.ANISITROPIC_FILTER, (int)defaultAnisitropicFilter);
-        LoadData<ShadowsLevel>(manager.refrences.ShadowsDropdown, GameData.SHADOWS_LEVEL, (int)defaultShadowsLevel);
-        LoadData<ReflectionLevel>(manager.refrences.ReflectionsDropdown, GameData.REFLECTIONS_LEVEL, (int)defaultReflectionLevel);
-        LoadData<AmbientOcclusion>(manager.refrences.AmbientOcclusionDropdown, GameData.AMBIENT_OCCLUSION, (int)defaultAO);
+        LoadData(manager.refrences.PresetDropdown, GameData.GRAPHICS_PRESET, (int)defaultPreset);
+        LoadData(manager.refrences.TexturesDropdown, GameData.TEXTURE_LEVEL, (int)defaultTextureLevel);
+        LoadData(manager.refrences.ModelQualityDropdown, GameData.MODEL_LEVEL, (int)defaultModelQualityLevel);
+        LoadData(manager.refrences.AnistropicFilterDropdown, GameData.ANISITROPIC_FILTER, (int)defaultAnisitropicFilter);
+        LoadData(manager.refrences.ShadowsDropdown, GameData.SHADOWS_LEVEL, (int)defaultShadowsLevel);
+        LoadData(manager.refrences.ReflectionsDropdown, GameData.REFLECTIONS_LEVEL, (int)defaultReflectionLevel);
+        LoadData(manager.refrences.AmbientOcclusionDropdown, GameData.AMBIENT_OCCLUSION, (int)defaultAO);
 
-        GraphicsListeners();   
+        GraphicsListeners();
     }
 
     #region OnValuesChanged
+
     private void OnPresetChanged(int index)
     {
-        SettingApplier();
+        if (_isUpdatingFromPreset) return;
+
+        PresetSeter(index);
 
         GraphicsPresetsController.Instance.SetQuality(index);
 
-        PlayerPrefs.SetInt(GameData.GRAPHICS_PRESET, index); 
-    }
-    private void OnTextureChanged(int index) {
-        CustomPresetSetter();
-        PlayerPrefs.SetInt(GameData.TEXTURE_LEVEL, index);
-    }
-    private void OnModelChanged(int index) {
-        CustomPresetSetter();
-        PlayerPrefs.SetInt(GameData.MODEL_LEVEL, index);
-    }
-    private void OnAnisitropicFilterChanged(int index) {
-        CustomPresetSetter();
-        PlayerPrefs.SetInt(GameData.ANISITROPIC_FILTER, index);
-    }
-    private void OnShadowChanged(int index)
-    {
-        CustomPresetSetter();
-        PlayerPrefs.SetInt(GameData.SHADOWS_LEVEL, index);
-    }
-    private void OnReflectionChanged(int index)
-    {
-        CustomPresetSetter();
-        PlayerPrefs.SetInt(GameData.REFLECTIONS_LEVEL, index);
-    }
-    private void OnAOChanged(int index)
-    {
-        CustomPresetSetter();
-        PlayerPrefs.SetInt(GameData.AMBIENT_OCCLUSION, index);
+        PlayerPrefs.SetInt(GameData.GRAPHICS_PRESET, index);
     }
 
+    private void OnTextureChanged(int index)
+    {
+        if (_isUpdatingFromPreset) return;
+
+        CustomSeter();
+
+        ApplyGraphicsSettings();
+
+        PlayerPrefs.SetInt(GameData.TEXTURE_LEVEL, index);
+    }
+
+    private void OnModelChanged(int index)
+    {
+        if (_isUpdatingFromPreset) return;
+
+        CustomSeter();
+
+        ApplyGraphicsSettings();
+
+        PlayerPrefs.SetInt(GameData.MODEL_LEVEL, index);
+
+    }
+
+    private void OnAnisitropicFilterChanged(int index)
+    {
+        if (_isUpdatingFromPreset) return;
+
+        CustomSeter();
+
+        ApplyGraphicsSettings();
+
+        PlayerPrefs.SetInt(GameData.ANISITROPIC_FILTER, index);
+    }
+
+    private void OnShadowChanged(int index)
+    {
+        if (_isUpdatingFromPreset) return;
+
+        CustomSeter();
+
+        ApplyGraphicsSettings();
+
+        PlayerPrefs.SetInt(GameData.SHADOWS_LEVEL, index);
+    }
+
+    private void OnReflectionChanged(int index)
+    {
+        if (_isUpdatingFromPreset) return;
+
+        CustomSeter();
+
+        ApplyGraphicsSettings();
+
+        PlayerPrefs.SetInt(GameData.REFLECTIONS_LEVEL, index);
+    }
+
+    private void OnAOChanged(int index)
+    {
+        if (_isUpdatingFromPreset) return;
+
+        CustomSeter();
+
+        ApplyGraphicsSettings();
+
+        PlayerPrefs.SetInt(GameData.AMBIENT_OCCLUSION, index);
+    }
 
     #endregion
 
     #region General
-    private void GraphicsListeners() {
+
+    private void GraphicsListeners()
+    {
         manager.refrences.PresetDropdown.onValueChanged.AddListener(OnPresetChanged);
         manager.refrences.TexturesDropdown.onValueChanged.AddListener(OnTextureChanged);
         manager.refrences.ModelQualityDropdown.onValueChanged.AddListener(OnModelChanged);
@@ -102,11 +152,14 @@ public class GraphicsDropdowns : MonoBehaviour
         manager.refrences.ReflectionsDropdown.onValueChanged.AddListener(OnReflectionChanged);
         manager.refrences.AmbientOcclusionDropdown.onValueChanged.AddListener(OnAOChanged);
     }
+
     private void GraphicsOptions<T>(TMP_Dropdown dropdown) where T : System.Enum
     {
-        dropdown.ClearOptions();
+        if (dropdown == null) return;
 
+        dropdown.ClearOptions();
         List<string> options = new List<string>();
+
         foreach (T item in System.Enum.GetValues(typeof(T)))
         {
             options.Add(item.ToString());
@@ -114,119 +167,129 @@ public class GraphicsDropdowns : MonoBehaviour
 
         dropdown.AddOptions(options);
     }
-    private void LoadData<T>(TMP_Dropdown dropdown, string prefId, int value) where T : System.Enum
+
+    private void LoadData(TMP_Dropdown dropdown, string prefId, int defaultValue)
     {
-        int savedLevel = PlayerPrefs.GetInt(prefId, value);
-        if (PlayerPrefs.HasKey(prefId))
-        {
-            dropdown.value = savedLevel;
-            dropdown.RefreshShownValue();
-        }
-        else
-        {
-            dropdown.value = value;
-            dropdown.RefreshShownValue();
-        }
+        if (dropdown == null) return;
+
+        int savedValue = PlayerPrefs.GetInt(prefId, defaultValue);
+        dropdown.value = savedValue;
+        dropdown.RefreshShownValue();
     }
-    private void CustomPresetSetter() {
+
+    private void PresetSeter(int presetIndex)
+    {
+        _isUpdatingFromPreset = true;
+
+        GraphicsPreset preset = (GraphicsPreset)presetIndex;
+
+        SetDropdownValue(manager.refrences.TexturesDropdown, (int)GetTextureLevelFromPreset(preset));
+        SetDropdownValue(manager.refrences.ModelQualityDropdown, (int)GetModelLevelFromPreset(preset));
+        SetDropdownValue(manager.refrences.AnistropicFilterDropdown, (int)GetAnisoLevelFromPreset(preset));
+        SetDropdownValue(manager.refrences.ShadowsDropdown, (int)GetShadowLevelFromPreset(preset));
+        SetDropdownValue(manager.refrences.ReflectionsDropdown, (int)GetReflectionLevelFromPreset(preset));
+        SetDropdownValue(manager.refrences.AmbientOcclusionDropdown, (int)GetAOLevelFromPreset(preset));
+
+        _isUpdatingFromPreset = false;
+    }
+
+    private void SetDropdownValue(TMP_Dropdown dropdown, int value)
+    {
+        if (dropdown == null) return;
+        dropdown.value = value;
+        dropdown.RefreshShownValue();
+    }
+
+    private void CustomSeter()
+    {
+        _isUpdatingFromPreset = true;
+
         manager.refrences.PresetDropdown.value = (int)GraphicsPreset.Custom;
         manager.refrences.PresetDropdown.RefreshShownValue();
+
+        _isUpdatingFromPreset = false;
     }
 
-    //whean refactor time arrived, this logic must be beter architecture
-    private void SettingApplier() { 
-        if (manager.refrences.PresetDropdown.value == (int)GraphicsPreset.VeryLow)
-        {
-            manager.refrences.PresetDropdown.value = (int)GraphicsPreset.VeryLow;
-            manager.refrences.PresetDropdown.RefreshShownValue();
-
-            manager.refrences.TexturesDropdown.value = (int)TexturesLevel.Low;
-            manager.refrences.TexturesDropdown.RefreshShownValue();
-
-            manager.refrences.ModelQualityDropdown.value = (int)ModelQualityLevel.Low;
-            manager.refrences.ModelQualityDropdown.RefreshShownValue();
-
-            manager.refrences.AnistropicFilterDropdown.value = (int)AnisotropicFilterLevel.Disabled;
-            manager.refrences.AnistropicFilterDropdown.RefreshShownValue();
-
-            manager.refrences.ShadowsDropdown.value = (int)ShadowsLevel.Low;
-            manager.refrences.ShadowsDropdown.RefreshShownValue();
-
-            manager.refrences.ReflectionsDropdown.value = (int)ReflectionLevel.Low;
-            manager.refrences.ReflectionsDropdown.RefreshShownValue();
-
-            manager.refrences.AmbientOcclusionDropdown.value = (int)AmbientOcclusion.Disabled;
-            manager.refrences.AmbientOcclusionDropdown.RefreshShownValue();
-        }
-        else if (manager.refrences.PresetDropdown.value == (int)GraphicsPreset.Low)
-        {
-            manager.refrences.PresetDropdown.value = (int)GraphicsPreset.Low;
-            manager.refrences.PresetDropdown.RefreshShownValue();
-
-            manager.refrences.TexturesDropdown.value = (int)TexturesLevel.Low;
-            manager.refrences.TexturesDropdown.RefreshShownValue();
-
-            manager.refrences.ModelQualityDropdown.value = (int)ModelQualityLevel.Low;
-            manager.refrences.ModelQualityDropdown.RefreshShownValue();
-
-            manager.refrences.AnistropicFilterDropdown.value = (int)AnisotropicFilterLevel.Low;
-            manager.refrences.AnistropicFilterDropdown.RefreshShownValue();
-
-            manager.refrences.ShadowsDropdown.value = (int)ShadowsLevel.Normal;
-            manager.refrences.ShadowsDropdown.RefreshShownValue();
-
-            manager.refrences.ReflectionsDropdown.value = (int)ReflectionLevel.Low;
-            manager.refrences.ReflectionsDropdown.RefreshShownValue();
-
-            manager.refrences.AmbientOcclusionDropdown.value = (int)AmbientOcclusion.Low;
-            manager.refrences.AmbientOcclusionDropdown.RefreshShownValue();
-        }
-        else if (manager.refrences.PresetDropdown.value == (int)GraphicsPreset.Normal)
-        {
-            manager.refrences.PresetDropdown.value = (int)GraphicsPreset.Normal;
-            manager.refrences.PresetDropdown.RefreshShownValue();
-
-            manager.refrences.TexturesDropdown.value = (int)TexturesLevel.Normal;
-            manager.refrences.TexturesDropdown.RefreshShownValue();
-
-            manager.refrences.ModelQualityDropdown.value = (int)ModelQualityLevel.Normal;
-            manager.refrences.ModelQualityDropdown.RefreshShownValue();
-
-            manager.refrences.AnistropicFilterDropdown.value = (int)AnisotropicFilterLevel.Normal;
-            manager.refrences.AnistropicFilterDropdown.RefreshShownValue();
-
-            manager.refrences.ShadowsDropdown.value = (int)ShadowsLevel.High;
-            manager.refrences.ShadowsDropdown.RefreshShownValue();
-
-            manager.refrences.ReflectionsDropdown.value = (int)ReflectionLevel.Normal;
-            manager.refrences.ReflectionsDropdown.RefreshShownValue();
-
-            manager.refrences.AmbientOcclusionDropdown.value = (int)AmbientOcclusion.Normal;
-            manager.refrences.AmbientOcclusionDropdown.RefreshShownValue();
-        }
-        else if (manager.refrences.PresetDropdown.value == (int)GraphicsPreset.High)
-        {
-            manager.refrences.PresetDropdown.value = (int)GraphicsPreset.High;
-            manager.refrences.PresetDropdown.RefreshShownValue();
-
-            manager.refrences.TexturesDropdown.value = (int)TexturesLevel.VeryHigh;
-            manager.refrences.TexturesDropdown.RefreshShownValue();
-
-            manager.refrences.ModelQualityDropdown.value = (int)ModelQualityLevel.Enhanced;
-            manager.refrences.ModelQualityDropdown.RefreshShownValue();
-
-            manager.refrences.AnistropicFilterDropdown.value = (int)AnisotropicFilterLevel.High;
-            manager.refrences.AnistropicFilterDropdown.RefreshShownValue();
-
-            manager.refrences.ShadowsDropdown.value = (int)ShadowsLevel.VeryHigh;
-            manager.refrences.ShadowsDropdown.RefreshShownValue();
-
-            manager.refrences.ReflectionsDropdown.value = (int)ReflectionLevel.High;
-            manager.refrences.ReflectionsDropdown.RefreshShownValue();
-
-            manager.refrences.AmbientOcclusionDropdown.value = (int)AmbientOcclusion.High;
-            manager.refrences.AmbientOcclusionDropdown.RefreshShownValue();
-        }
+    private void ApplyGraphicsSettings()
+    {
+        //QualitySettings.masterTextureLimit = manager.refrences.TexturesDropdown.value;
     }
+
+    #endregion
+
+    #region Preset Mapping
+
+    private TexturesLevel GetTextureLevelFromPreset(GraphicsPreset preset)
+    {
+        return preset switch
+        {
+            GraphicsPreset.VeryLow => TexturesLevel.Low,
+            GraphicsPreset.Low => TexturesLevel.Normal,
+            GraphicsPreset.Normal => TexturesLevel.High,
+            GraphicsPreset.High => TexturesLevel.VeryHigh,
+            _ => TexturesLevel.Low
+        };
+    }
+
+    private ModelQualityLevel GetModelLevelFromPreset(GraphicsPreset preset)
+    {
+        return preset switch
+        {
+            GraphicsPreset.VeryLow => ModelQualityLevel.Low,
+            GraphicsPreset.Low => ModelQualityLevel.Economy,
+            GraphicsPreset.Normal => ModelQualityLevel.Normal,
+            GraphicsPreset.High => ModelQualityLevel.Enhanced,
+            _ => ModelQualityLevel.Economy
+        };
+    }
+
+    private AnisotropicFilterLevel GetAnisoLevelFromPreset(GraphicsPreset preset)
+    {
+        return preset switch
+        {
+            GraphicsPreset.VeryLow => AnisotropicFilterLevel.Disabled,
+            GraphicsPreset.Low => AnisotropicFilterLevel.Low,
+            GraphicsPreset.Normal => AnisotropicFilterLevel.Normal,
+            GraphicsPreset.High => AnisotropicFilterLevel.High,
+            _ => AnisotropicFilterLevel.Low
+        };
+    }
+
+    private ShadowsLevel GetShadowLevelFromPreset(GraphicsPreset preset)
+    {
+        return preset switch
+        {
+            GraphicsPreset.VeryLow => ShadowsLevel.Low,
+            GraphicsPreset.Low => ShadowsLevel.Normal,
+            GraphicsPreset.Normal => ShadowsLevel.High,
+            GraphicsPreset.High => ShadowsLevel.VeryHigh,
+            _ => ShadowsLevel.Normal
+        };
+    }
+
+    private ReflectionLevel GetReflectionLevelFromPreset(GraphicsPreset preset)
+    {
+        return preset switch
+        {
+            GraphicsPreset.VeryLow => ReflectionLevel.Low,
+            GraphicsPreset.Low => ReflectionLevel.Normal,
+            GraphicsPreset.Normal => ReflectionLevel.High,
+            GraphicsPreset.High => ReflectionLevel.VeryHigh,
+            _ => ReflectionLevel.Normal
+        };
+    }
+
+    private AmbientOcclusion GetAOLevelFromPreset(GraphicsPreset preset)
+    {
+        return preset switch
+        {
+            GraphicsPreset.VeryLow => AmbientOcclusion.Disabled,
+            GraphicsPreset.Low => AmbientOcclusion.Low,
+            GraphicsPreset.Normal => AmbientOcclusion.Normal,
+            GraphicsPreset.High => AmbientOcclusion.High,
+            _ => AmbientOcclusion.Disabled
+        };
+    }
+
     #endregion
 }

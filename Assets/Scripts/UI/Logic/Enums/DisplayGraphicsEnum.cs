@@ -1,5 +1,5 @@
 public enum GraphicsPreset
-{
+{   
     Custom,
     VeryLow,
     Low,
@@ -14,6 +14,7 @@ public enum TexturesLevel {
 }
 public enum ModelQualityLevel { 
     Low,
+    Economy,
     Normal,
     Enhanced
 }
@@ -32,7 +33,8 @@ public enum ShadowsLevel {
 public enum ReflectionLevel {
     Low,
     Normal,
-    High
+    High, 
+    VeryHigh
 }
 public enum AmbientOcclusion
 {

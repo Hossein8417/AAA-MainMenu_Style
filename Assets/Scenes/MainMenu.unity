@@ -5504,6 +5504,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 3427087848474807930, guid: b1872193f63b8a44abc655726e22a1c2, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 93308469}
+    - target: {fileID: 3427087848474807930, guid: b1872193f63b8a44abc655726e22a1c2, type: 3}
+      propertyPath: defaultPhotoMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5330197988072310329, guid: b1872193f63b8a44abc655726e22a1c2, type: 3}
       propertyPath: NoButton
       value: 
@@ -5868,6 +5876,30 @@ PrefabInstance:
       propertyPath: EstimatedGraphicsUsageValueText
       value: 
       objectReference: {fileID: 1887419290}
+    - target: {fileID: 5673211765132804074, guid: b1872193f63b8a44abc655726e22a1c2, type: 3}
+      propertyPath: defaultAO
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5673211765132804074, guid: b1872193f63b8a44abc655726e22a1c2, type: 3}
+      propertyPath: defaultPreset
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5673211765132804074, guid: b1872193f63b8a44abc655726e22a1c2, type: 3}
+      propertyPath: defaultShadowsLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5673211765132804074, guid: b1872193f63b8a44abc655726e22a1c2, type: 3}
+      propertyPath: defaultTextureLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5673211765132804074, guid: b1872193f63b8a44abc655726e22a1c2, type: 3}
+      propertyPath: defaultAnisitropicFilter
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5673211765132804074, guid: b1872193f63b8a44abc655726e22a1c2, type: 3}
+      propertyPath: defaultModelQualityLevel
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5997405864490193307, guid: b1872193f63b8a44abc655726e22a1c2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5914,9 +5946,10 @@ PrefabInstance:
       objectReference: {fileID: 1246903601}
     - target: {fileID: 7257261158765003548, guid: b1872193f63b8a44abc655726e22a1c2, type: 3}
       propertyPath: versionString
-      value: v2.5
+      value: v2.7
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8461718964604608812, guid: b1872193f63b8a44abc655726e22a1c2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

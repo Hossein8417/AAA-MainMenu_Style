@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 public class ButtonsController : MonoBehaviour
 {
     //buttons controller must separate in multi button constrollers
+    //if graphic settings are not equal to default or previous setting s =>
+    //a pop up displayer shows to the player to apply settings with apply button
     [SerializeField]
     private UIManager manager;
     private void Awake()

@@ -1,5 +1,4 @@
-using UnityEngine;
-public class GameData : MonoBehaviour
+public class GameData
 { 
     public static GameData Instance { get; private set; }
 
@@ -28,15 +27,7 @@ public class GameData : MonoBehaviour
     public const string SUBTITLES_LANGUAGE = "SubtitlesLanguage";
     public const string SPEECH_LANGUAGE = "SpeechLanguage";
     public const string LANGUAGE_LOCALE = "LanguageLocale";
-    private void Awake()
-    {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-        }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
+
     public string DateTime() {
         string date = System.DateTime.Now.ToString("yyyy/MM/dd");
         string time = System.DateTime.Now.ToString("HH/mm");

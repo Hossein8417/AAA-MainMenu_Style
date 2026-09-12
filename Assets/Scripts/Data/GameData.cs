@@ -24,6 +24,7 @@ public class GameData : MonoBehaviour
     public const string DISPLAY_RESOLUTION = "DisplayResolution";
     public const string DISPLAY_MONITOR = "DisplayMonitor";
     public const string V_SYNC = "V-Sync";
+    public const string ASPECTY_RATIO = "AspectRatio";
     public const string GRAPHICS_PRESET = "GraphicsPreset";
     public const string TEXTURE_LEVEL = "TextureLevel";
     public const string MODEL_LEVEL = "ModelLevel";

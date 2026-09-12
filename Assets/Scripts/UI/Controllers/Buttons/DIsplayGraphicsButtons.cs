@@ -21,11 +21,14 @@ public class DisplayGraphicsButtons : MonoBehaviour
     private void OnDisplayResetClicked()
     {
         PlayerPrefs.DeleteKey(GameData.DISPLAY_RESOLUTION);
+        PlayerPrefs.DeleteKey(GameData.ASPECTY_RATIO);
         PlayerPrefs.DeleteKey(GameData.V_SYNC);
 
         const int screenWidth = 1280;
         const int screenHeight = 720;
         const int defaultResolutionIndex = 3;
+
+        const int defaultAspectRatio = 0;
 
         Screen.SetResolution(screenWidth, screenHeight, Screen.fullScreenMode);
 
@@ -34,8 +37,15 @@ public class DisplayGraphicsButtons : MonoBehaviour
 
         manager.refrences.VsyncToggle.isOn = true;
 
+        manager.refrences.AspectRatioDropdown.value = defaultAspectRatio;
+        manager.refrences.AspectRatioDropdown.RefreshShownValue();
+
         PlayerPrefs.SetInt(GameData.DISPLAY_RESOLUTION, defaultResolutionIndex);
         PlayerPrefs.SetInt(GameData.V_SYNC, 1);
+        PlayerPrefs.SetInt(GameData.ASPECTY_RATIO, defaultAspectRatio);
+
+
+        
         PlayerPrefs.Save();
     }
 

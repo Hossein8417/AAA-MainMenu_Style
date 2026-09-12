@@ -1,82 +1,73 @@
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Presets;
 using UnityEngine;
 
-public class GameplayDropdowns : MonoBehaviour 
+public class GameplayDropdowns : MonoBehaviour
 {
     [SerializeField]
     private UIManager manager;
 
-    [Header("Defualt Settings")]
-    [SerializeField]
-    private ChallangeLevel defaultChallangeLevel;
-
-    [SerializeField]
-    private SubtitlesMode defaultSubtitlesMode;
-
-    [SerializeField]
-    private GameHintMode defaultGameHintMode;
-
-    [SerializeField]
-    private TutorialsMode defaultTutorialMode;
-
-    [SerializeField]
-    private PhotoMode defaultPhotoMode;
+    [Header("Default Settings")]
+    [SerializeField] private ChallangeLevel defaultChallangeLevel = ChallangeLevel.Normal;
+    [SerializeField] private SubtitlesMode defaultSubtitlesMode = SubtitlesMode.On;
+    [SerializeField] private GameHintMode defaultGameHintMode = GameHintMode.On;
+    [SerializeField] private TutorialsMode defaultTutorialMode = TutorialsMode.On;
+    [SerializeField] private PhotoMode defaultPhotoMode = PhotoMode.Off;
 
     private void Awake()
     {
+        if (manager == null) return;
+
         GameplayOptions<ChallangeLevel>(manager.refrences.ChallangeDropdown);
-        GameplayOptions<SubtitlesLanguages>(manager.refrences.GameplaySubtitlesDropdown);
+        GameplayOptions<SubtitlesMode>(manager.refrences.GameplaySubtitlesDropdown);
         GameplayOptions<GameHintMode>(manager.refrences.GameHintDropdown);
         GameplayOptions<TutorialsMode>(manager.refrences.TuturialsDropdown);
         GameplayOptions<PhotoMode>(manager.refrences.PhotoModeDropdown);
 
-        LoadData<ChallangeLevel>(manager.refrences.ChallangeDropdown, GameData.CHALLANGE_MODE, (int)defaultChallangeLevel);
-        LoadData<SubtitlesLanguages>(manager.refrences.GameplaySubtitlesDropdown, GameData.SUBTITLE_MODE, (int)defaultSubtitlesMode);
-        LoadData<GameHintMode>(manager.refrences.GameHintDropdown, GameData.GAME_HINT_MODE, (int)defaultGameHintMode);
-        LoadData<TutorialsMode>(manager.refrences.TuturialsDropdown, GameData.TUTORIALS_MODE, (int)defaultTutorialMode);
-        LoadData<PhotoMode>(manager.refrences.PhotoModeDropdown, GameData.PHOTO_MODE, (int)defaultPhotoMode);
+        LoadData(manager.refrences.ChallangeDropdown, GameData.CHALLANGE_MODE, (int)defaultChallangeLevel);
+        LoadData(manager.refrences.GameplaySubtitlesDropdown, GameData.SUBTITLE_MODE, (int)defaultSubtitlesMode);
+        LoadData(manager.refrences.GameHintDropdown, GameData.GAME_HINT_MODE, (int)defaultGameHintMode);
+        LoadData(manager.refrences.TuturialsDropdown, GameData.TUTORIALS_MODE, (int)defaultTutorialMode);
+        LoadData(manager.refrences.PhotoModeDropdown, GameData.PHOTO_MODE, (int)defaultPhotoMode);
 
         DropdownsListeners();
     }
+
     #region OnDropdownsValuesChanged
     public void OnChallangeChanged(int index)
     {
         PlayerPrefs.SetInt(GameData.CHALLANGE_MODE, index);
         PlayerPrefs.Save();
-
-        ChallangeLevel selectedLevel = (ChallangeLevel)index;
     }
-    public void OnSubtitleChanged(int index) {
+
+    public void OnSubtitleChanged(int index)
+    {
         PlayerPrefs.SetInt(GameData.SUBTITLE_MODE, index);
         PlayerPrefs.Save();
-
-        SubtitlesMode selectedMode = (SubtitlesMode)index;
     }
-    public void OnGameHintChanged(int index) {
+
+    public void OnGameHintChanged(int index)
+    {
         PlayerPrefs.SetInt(GameData.GAME_HINT_MODE, index);
         PlayerPrefs.Save();
-
-        GameHintMode selectedGameHintMode = (GameHintMode)index;
     }
-    public void OnTutorialChanged(int index) {
+
+    public void OnTutorialChanged(int index)
+    {
         PlayerPrefs.SetInt(GameData.TUTORIALS_MODE, index);
         PlayerPrefs.Save();
-
-        TutorialsMode savedMode = (TutorialsMode)index;
     }
-    public void OnPhotoModeChanged(int index) {
+
+    public void OnPhotoModeChanged(int index)
+    {
         PlayerPrefs.SetInt(GameData.PHOTO_MODE, index);
         PlayerPrefs.Save();
-
-        PhotoMode selectedPhotoMode = (PhotoMode)index;
     }
     #endregion
 
     #region General
-
-    private void DropdownsListeners() {
+    private void DropdownsListeners()
+    {
         manager.refrences.ChallangeDropdown.onValueChanged.AddListener(OnChallangeChanged);
         manager.refrences.GameplaySubtitlesDropdown.onValueChanged.AddListener(OnSubtitleChanged);
         manager.refrences.GameHintDropdown.onValueChanged.AddListener(OnGameHintChanged);
@@ -86,9 +77,11 @@ public class GameplayDropdowns : MonoBehaviour
 
     private void GameplayOptions<T>(TMP_Dropdown dropdown) where T : System.Enum
     {
-        dropdown.ClearOptions();
+        if (dropdown == null) return;
 
+        dropdown.ClearOptions();
         List<string> options = new List<string>();
+
         foreach (T item in System.Enum.GetValues(typeof(T)))
         {
             options.Add(item.ToString());
@@ -96,19 +89,18 @@ public class GameplayDropdowns : MonoBehaviour
 
         dropdown.AddOptions(options);
     }
-    private void LoadData<T>(TMP_Dropdown dropdown, string prefId, int value) where T : System.Enum
+
+    private void LoadData(TMP_Dropdown dropdown, string prefId, int defaultValue)
     {
-        int savedLevel = PlayerPrefs.GetInt(prefId, value);
-        if (PlayerPrefs.HasKey(prefId))
-        {
-            dropdown.value = savedLevel;
-            dropdown.RefreshShownValue();
-        }
-        else
-        {
-            dropdown.value = value;
-            dropdown.RefreshShownValue();
-        }
+        if (dropdown == null) return;
+
+        int savedValue = PlayerPrefs.GetInt(prefId, defaultValue);
+
+        if (savedValue < 0 || savedValue >= dropdown.options.Count)
+            savedValue = defaultValue;
+
+        dropdown.SetValueWithoutNotify(savedValue);
+        dropdown.RefreshShownValue();
     }
     #endregion
 }

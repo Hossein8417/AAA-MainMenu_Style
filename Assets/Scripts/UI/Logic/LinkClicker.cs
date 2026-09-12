@@ -15,15 +15,14 @@ public class LinkClicker : MonoBehaviour, IPointerClickHandler
             eventData.enterEventCamera
         );
 
-        if (linkIndex != -1)
+        if (linkIndex == -1) return;
+        
+        TMP_LinkInfo linkInfo = textComponent.textInfo.linkInfo[linkIndex];
+        string linkId = linkInfo.GetLinkID();
+
+        if (linkId.StartsWith("http"))
         {
-            TMP_LinkInfo linkInfo = textComponent.textInfo.linkInfo[linkIndex];
-            string linkId = linkInfo.GetLinkID();
-            if (linkId.StartsWith("http"))
-            {
-                Application.OpenURL(linkId);
-            }
-            if (!linkId.StartsWith("http")) return;
-        }
+            Application.OpenURL(linkId);
+        }        
     }
 }

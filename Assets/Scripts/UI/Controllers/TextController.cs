@@ -5,13 +5,15 @@ public class TextController : MonoBehaviour
     [SerializeField]
     private UIManager manager;
 
-    private void Update()
+    private void Start()
     {
         GraphicsTotolMemoryDisplayer();
     }
 
     private void GraphicsTotolMemoryDisplayer() {
-        string text = SystemInfo.graphicsMemorySize.ToString();
-        manager.refrences.TotalValueText.text = text;
+        if (manager == null || manager.refrences == null ||
+            manager.refrences.TotalValueText == null) return;
+
+        manager.refrences.TotalValueText.text = SystemInfo.graphicsMemorySize.ToString();
     }
 }

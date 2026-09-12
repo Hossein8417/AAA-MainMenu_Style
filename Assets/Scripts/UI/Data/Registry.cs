@@ -4,7 +4,6 @@ public class Registry : MonoBehaviour
 {
     [SerializeField]
     private UIManager manager;
-    public static Registry Instance { get; private set; }
 
     #region States
     public EnterMenu enterMenu;
@@ -24,10 +23,17 @@ public class Registry : MonoBehaviour
     public LanguageMenu languageMenu;
     public CreditsMenu creditsMenu;
     #endregion
+    private void Awake()
+    {
+        if (manager == null) manager = GetComponent<UIManager>();
+        InitializeStates();
+    }
 
     public Dictionary<States, IState> states = new Dictionary<States, IState>();
     public void InitializeStates()
     {
+        if (states.Count > 0) return;
+
         enterMenu = new EnterMenu(manager);
         mainMenu = new MainMenu(manager);
         storyMenu = new StoryMenu(manager);
@@ -64,5 +70,9 @@ public class Registry : MonoBehaviour
         states.Add(States.Audio, audioMenu);
         states.Add(States.Language, languageMenu);
         states.Add(States.Credits, creditsMenu);
+    }
+    public IState Get(States state)
+    {
+        return states[state];
     }
 }

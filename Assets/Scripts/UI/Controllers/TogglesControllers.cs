@@ -7,8 +7,9 @@ public class TogglesControllers : MonoBehaviour
 
     private void Awake()
     {
-        LoadDefaultVsyncValue();
+        if (manager == null) return;
 
+        LoadDefaultVsyncValue();
         TogglesListeners();
     }
 
@@ -17,30 +18,26 @@ public class TogglesControllers : MonoBehaviour
     {
         ApplyVSync(isChanged);
         PlayerPrefs.SetInt(GameData.V_SYNC, isChanged ? 1 : 0);
+        PlayerPrefs.Save();
     }
     #endregion
 
-    #region LoadDefaults
+    #region Load
     private void LoadDefaultVsyncValue()
     {
-        if (PlayerPrefs.HasKey(GameData.V_SYNC))
-        {
-            bool isEnabled = PlayerPrefs.GetInt(GameData.V_SYNC, 1) == 1;
-            manager.refrences.VsyncToggle.isOn = isEnabled;
-            ApplyVSync(isEnabled);
-        }
-        else
-        {
-            manager.refrences.VsyncToggle.isOn = true;
-            ApplyVSync(true);
-        }
+        bool isEnabled = PlayerPrefs.GetInt(GameData.V_SYNC, 1) == 1;
+
+        manager.refrences.VsyncToggle.SetIsOnWithoutNotify(isEnabled);
+        ApplyVSync(isEnabled);
     }
     #endregion
 
     #region General
-    private void ApplyVSync(bool isEnabled) { 
+    private void ApplyVSync(bool isEnabled)
+    {
         QualitySettings.vSyncCount = isEnabled ? 1 : 0;
     }
+
     private void TogglesListeners()
     {
         manager.refrences.VsyncToggle.onValueChanged.AddListener(OnVsyncToggleValueChanged);

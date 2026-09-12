@@ -1,35 +1,47 @@
 using UnityEngine;
-public class UIManager : MonoBehaviour
-{ 
-    public UIRefrences refrences;
 
-    IState currentState;
+public class UIManager : MonoBehaviour
+{
+    [SerializeField]
+    private UIRefrences _refrences;
+    public UIRefrences refrences => _refrences;
+
+    [SerializeField]
+    private Registry registry;
+
+    private IState currentState;
+
+    private void Awake()
+    {
+        if (_refrences == null) _refrences = GetComponent<UIRefrences>();
+        if (registry == null) registry = GetComponent<Registry>();
+        if (registry == null) registry = gameObject.AddComponent<Registry>();
+    }
+
     private void Start()
     {
-        Registry.Instance.InitializeStates();
-        InitialDefaultState();
+        InitializeDefaultState();
+    }
+
+    private void InitializeDefaultState()
+    {
+        currentState = registry.Get(States.EnterMenu);
+        currentState.Show();
     }
 
     private void Update()
     {
-        currentState.UpdateState();
+        currentState?.UpdateState();
     }
-    
+
     public void ChangeState(States newState)
     {
-        currentState.Hide();
-       
-        currentState = Get(newState);
+        if (currentState == null) return;
 
-        currentState.Show();
-    }
+        currentState?.Hide();
 
-    private void InitialDefaultState() {
-        currentState = Get(States.EnterMenu);
-        currentState.Show();
-    }
-    public IState Get(States state)
-    {
-        return Registry.Instance.states[state];
+        currentState = registry.Get(newState); ;
+
+        currentState?.Show();
     }
 }

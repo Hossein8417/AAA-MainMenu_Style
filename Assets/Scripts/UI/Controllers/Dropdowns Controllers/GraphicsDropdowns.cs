@@ -1,44 +1,28 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 
 public class GraphicsDropdowns : MonoBehaviour
 {
-
     #region References
-
     [SerializeField] private UIManager manager;
 
     [Header("Default Settings")]
-
-    [SerializeField] 
-    private GraphicsPreset defaultPreset = GraphicsPreset.Low;
-
-    [SerializeField] 
-    private TexturesLevel defaultTextureLevel = TexturesLevel.Low;
-
-    [SerializeField] 
-    private ModelQualityLevel defaultModelQualityLevel = ModelQualityLevel.Economy;
-
-    [SerializeField] 
-    private ShadowsLevel defaultShadowsLevel = ShadowsLevel.Low;
-
-    [SerializeField] 
-    private ReflectionLevel defaultReflectionLevel = ReflectionLevel.Low;
-
-    [SerializeField] 
-    private AmbientOcclusion defaultAO = AmbientOcclusion.Disabled;
-
-    [SerializeField] 
-    private AnisotropicFilterLevel defaultAnisitropicFilter = AnisotropicFilterLevel.Disabled;
-
+    [SerializeField] private GraphicsPreset defaultPreset = GraphicsPreset.Low;
+    [SerializeField] private TexturesLevel defaultTextureLevel = TexturesLevel.Low;
+    [SerializeField] private ModelQualityLevel defaultModelQualityLevel = ModelQualityLevel.Economy;
+    [SerializeField] private ShadowsLevel defaultShadowsLevel = ShadowsLevel.Low;
+    [SerializeField] private ReflectionLevel defaultReflectionLevel = ReflectionLevel.Low;
+    [SerializeField] private AmbientOcclusion defaultAO = AmbientOcclusion.Disabled;
+    [SerializeField] private AnisotropicFilterLevel defaultAnisitropicFilter = AnisotropicFilterLevel.Disabled;
     #endregion
 
-    private bool _isUpdatingFromPreset = false;
+    private bool isUpdatingFromPreset = false;
 
     private void Awake()
     {
+        if (manager == null) return;
+
         GraphicsOptions<GraphicsPreset>(manager.refrences.PresetDropdown);
         GraphicsOptions<TexturesLevel>(manager.refrences.TexturesDropdown);
         GraphicsOptions<ModelQualityLevel>(manager.refrences.ModelQualityDropdown);
@@ -59,89 +43,67 @@ public class GraphicsDropdowns : MonoBehaviour
     }
 
     #region OnValuesChanged
-
     private void OnPresetChanged(int index)
     {
-        if (_isUpdatingFromPreset) return;
+        if (isUpdatingFromPreset) return;
 
         PresetSeter(index);
-
         GraphicsPresetsController.Instance.SetQuality(index);
 
         PlayerPrefs.SetInt(GameData.GRAPHICS_PRESET, index);
+        PlayerPrefs.Save();
     }
 
     private void OnTextureChanged(int index)
     {
-        if (_isUpdatingFromPreset) return;
-
+        if (isUpdatingFromPreset) return;
         CustomSeter();
-
         ApplyGraphicsSettings();
-
         PlayerPrefs.SetInt(GameData.TEXTURE_LEVEL, index);
     }
 
     private void OnModelChanged(int index)
     {
-        if (_isUpdatingFromPreset) return;
-
+        if (isUpdatingFromPreset) return;
         CustomSeter();
-
         ApplyGraphicsSettings();
-
         PlayerPrefs.SetInt(GameData.MODEL_LEVEL, index);
-
     }
 
     private void OnAnisitropicFilterChanged(int index)
     {
-        if (_isUpdatingFromPreset) return;
-
+        if (isUpdatingFromPreset) return;
         CustomSeter();
-
         ApplyGraphicsSettings();
-
         PlayerPrefs.SetInt(GameData.ANISITROPIC_FILTER, index);
     }
 
     private void OnShadowChanged(int index)
     {
-        if (_isUpdatingFromPreset) return;
-
+        if (isUpdatingFromPreset) return;
         CustomSeter();
-
         ApplyGraphicsSettings();
-
         PlayerPrefs.SetInt(GameData.SHADOWS_LEVEL, index);
     }
 
     private void OnReflectionChanged(int index)
     {
-        if (_isUpdatingFromPreset) return;
-
+        if (isUpdatingFromPreset) return;
         CustomSeter();
-
         ApplyGraphicsSettings();
-
         PlayerPrefs.SetInt(GameData.REFLECTIONS_LEVEL, index);
     }
 
     private void OnAOChanged(int index)
     {
-        if (_isUpdatingFromPreset) return;
-
+        if (isUpdatingFromPreset) return;
         CustomSeter();
-
         ApplyGraphicsSettings();
-
         PlayerPrefs.SetInt(GameData.AMBIENT_OCCLUSION, index);
     }
-
     #endregion
 
     #region General
-
     private void GraphicsListeners()
     {
         manager.refrences.PresetDropdown.onValueChanged.AddListener(OnPresetChanged);
@@ -173,123 +135,118 @@ public class GraphicsDropdowns : MonoBehaviour
         if (dropdown == null) return;
 
         int savedValue = PlayerPrefs.GetInt(prefId, defaultValue);
-        dropdown.value = savedValue;
+        if (savedValue < 0 || savedValue >= dropdown.options.Count)
+            savedValue = defaultValue;
+
+        dropdown.SetValueWithoutNotify(savedValue);
         dropdown.RefreshShownValue();
     }
 
     private void PresetSeter(int presetIndex)
     {
-        _isUpdatingFromPreset = true;
+        isUpdatingFromPreset = true;
 
         GraphicsPreset preset = (GraphicsPreset)presetIndex;
 
-        SetDropdownValue(manager.refrences.TexturesDropdown, (int)GetTextureLevelFromPreset(preset));
-        SetDropdownValue(manager.refrences.ModelQualityDropdown, (int)GetModelLevelFromPreset(preset));
-        SetDropdownValue(manager.refrences.AnistropicFilterDropdown, (int)GetAnisoLevelFromPreset(preset));
-        SetDropdownValue(manager.refrences.ShadowsDropdown, (int)GetShadowLevelFromPreset(preset));
-        SetDropdownValue(manager.refrences.ReflectionsDropdown, (int)GetReflectionLevelFromPreset(preset));
-        SetDropdownValue(manager.refrences.AmbientOcclusionDropdown, (int)GetAOLevelFromPreset(preset));
+        int tex = (int)GetTextureLevelFromPreset(preset);
+        int model = (int)GetModelLevelFromPreset(preset);
+        int aniso = (int)GetAnisoLevelFromPreset(preset);
+        int shadow = (int)GetShadowLevelFromPreset(preset);
+        int refl = (int)GetReflectionLevelFromPreset(preset);
+        int ao = (int)GetAOLevelFromPreset(preset);
 
-        _isUpdatingFromPreset = false;
+        SetDropdownValue(manager.refrences.TexturesDropdown, tex);
+        SetDropdownValue(manager.refrences.ModelQualityDropdown, model);
+        SetDropdownValue(manager.refrences.AnistropicFilterDropdown, aniso);
+        SetDropdownValue(manager.refrences.ShadowsDropdown, shadow);
+        SetDropdownValue(manager.refrences.ReflectionsDropdown, refl);
+        SetDropdownValue(manager.refrences.AmbientOcclusionDropdown, ao);
+
+        PlayerPrefs.SetInt(GameData.TEXTURE_LEVEL, tex);
+        PlayerPrefs.SetInt(GameData.MODEL_LEVEL, model);
+        PlayerPrefs.SetInt(GameData.ANISITROPIC_FILTER, aniso);
+        PlayerPrefs.SetInt(GameData.SHADOWS_LEVEL, shadow);
+        PlayerPrefs.SetInt(GameData.REFLECTIONS_LEVEL, refl);
+        PlayerPrefs.SetInt(GameData.AMBIENT_OCCLUSION, ao);
+        PlayerPrefs.Save();
+
+        isUpdatingFromPreset = false;
     }
 
     private void SetDropdownValue(TMP_Dropdown dropdown, int value)
     {
         if (dropdown == null) return;
-        dropdown.value = value;
+        dropdown.SetValueWithoutNotify(value);
         dropdown.RefreshShownValue();
     }
 
     private void CustomSeter()
     {
-        _isUpdatingFromPreset = true;
-
-        manager.refrences.PresetDropdown.value = (int)GraphicsPreset.Custom;
+        isUpdatingFromPreset = true;
+        manager.refrences.PresetDropdown.SetValueWithoutNotify((int)GraphicsPreset.Custom);
         manager.refrences.PresetDropdown.RefreshShownValue();
-
-        _isUpdatingFromPreset = false;
+        isUpdatingFromPreset = false;
     }
 
     private void ApplyGraphicsSettings()
     {
         //QualitySettings.masterTextureLimit = manager.refrences.TexturesDropdown.value;
     }
-
     #endregion
 
     #region Preset Mapping
-
-    private TexturesLevel GetTextureLevelFromPreset(GraphicsPreset preset)
+    private TexturesLevel GetTextureLevelFromPreset(GraphicsPreset preset) => preset switch
     {
-        return preset switch
-        {
-            GraphicsPreset.VeryLow => TexturesLevel.Low,
-            GraphicsPreset.Low => TexturesLevel.Normal,
-            GraphicsPreset.Normal => TexturesLevel.High,
-            GraphicsPreset.High => TexturesLevel.VeryHigh,
-            _ => TexturesLevel.Low
-        };
-    }
+        GraphicsPreset.VeryLow => TexturesLevel.Low,
+        GraphicsPreset.Low => TexturesLevel.Normal,
+        GraphicsPreset.Normal => TexturesLevel.High,
+        GraphicsPreset.High => TexturesLevel.VeryHigh,
+        _ => TexturesLevel.Low
+    };
 
-    private ModelQualityLevel GetModelLevelFromPreset(GraphicsPreset preset)
+    private ModelQualityLevel GetModelLevelFromPreset(GraphicsPreset preset) => preset switch
     {
-        return preset switch
-        {
-            GraphicsPreset.VeryLow => ModelQualityLevel.Low,
-            GraphicsPreset.Low => ModelQualityLevel.Economy,
-            GraphicsPreset.Normal => ModelQualityLevel.Normal,
-            GraphicsPreset.High => ModelQualityLevel.Enhanced,
-            _ => ModelQualityLevel.Economy
-        };
-    }
+        GraphicsPreset.VeryLow => ModelQualityLevel.Low,
+        GraphicsPreset.Low => ModelQualityLevel.Economy,
+        GraphicsPreset.Normal => ModelQualityLevel.Normal,
+        GraphicsPreset.High => ModelQualityLevel.Enhanced,
+        _ => ModelQualityLevel.Economy
+    };
 
-    private AnisotropicFilterLevel GetAnisoLevelFromPreset(GraphicsPreset preset)
+    private AnisotropicFilterLevel GetAnisoLevelFromPreset(GraphicsPreset preset) => preset switch
     {
-        return preset switch
-        {
-            GraphicsPreset.VeryLow => AnisotropicFilterLevel.Disabled,
-            GraphicsPreset.Low => AnisotropicFilterLevel.Low,
-            GraphicsPreset.Normal => AnisotropicFilterLevel.Normal,
-            GraphicsPreset.High => AnisotropicFilterLevel.High,
-            _ => AnisotropicFilterLevel.Low
-        };
-    }
+        GraphicsPreset.VeryLow => AnisotropicFilterLevel.Disabled,
+        GraphicsPreset.Low => AnisotropicFilterLevel.Low,
+        GraphicsPreset.Normal => AnisotropicFilterLevel.Normal,
+        GraphicsPreset.High => AnisotropicFilterLevel.High,
+        _ => AnisotropicFilterLevel.Low
+    };
 
-    private ShadowsLevel GetShadowLevelFromPreset(GraphicsPreset preset)
+    private ShadowsLevel GetShadowLevelFromPreset(GraphicsPreset preset) => preset switch
     {
-        return preset switch
-        {
-            GraphicsPreset.VeryLow => ShadowsLevel.Low,
-            GraphicsPreset.Low => ShadowsLevel.Normal,
-            GraphicsPreset.Normal => ShadowsLevel.High,
-            GraphicsPreset.High => ShadowsLevel.VeryHigh,
-            _ => ShadowsLevel.Normal
-        };
-    }
+        GraphicsPreset.VeryLow => ShadowsLevel.Low,
+        GraphicsPreset.Low => ShadowsLevel.Normal,
+        GraphicsPreset.Normal => ShadowsLevel.High,
+        GraphicsPreset.High => ShadowsLevel.VeryHigh,
+        _ => ShadowsLevel.Normal
+    };
 
-    private ReflectionLevel GetReflectionLevelFromPreset(GraphicsPreset preset)
+    private ReflectionLevel GetReflectionLevelFromPreset(GraphicsPreset preset) => preset switch
     {
-        return preset switch
-        {
-            GraphicsPreset.VeryLow => ReflectionLevel.Low,
-            GraphicsPreset.Low => ReflectionLevel.Normal,
-            GraphicsPreset.Normal => ReflectionLevel.High,
-            GraphicsPreset.High => ReflectionLevel.VeryHigh,
-            _ => ReflectionLevel.Normal
-        };
-    }
+        GraphicsPreset.VeryLow => ReflectionLevel.Low,
+        GraphicsPreset.Low => ReflectionLevel.Normal,
+        GraphicsPreset.Normal => ReflectionLevel.High,
+        GraphicsPreset.High => ReflectionLevel.VeryHigh,
+        _ => ReflectionLevel.Normal
+    };
 
-    private AmbientOcclusion GetAOLevelFromPreset(GraphicsPreset preset)
+    private AmbientOcclusion GetAOLevelFromPreset(GraphicsPreset preset) => preset switch
     {
-        return preset switch
-        {
-            GraphicsPreset.VeryLow => AmbientOcclusion.Disabled,
-            GraphicsPreset.Low => AmbientOcclusion.Low,
-            GraphicsPreset.Normal => AmbientOcclusion.Normal,
-            GraphicsPreset.High => AmbientOcclusion.High,
-            _ => AmbientOcclusion.Disabled
-        };
-    }
-
+        GraphicsPreset.VeryLow => AmbientOcclusion.Disabled,
+        GraphicsPreset.Low => AmbientOcclusion.Low,
+        GraphicsPreset.Normal => AmbientOcclusion.Normal,
+        GraphicsPreset.High => AmbientOcclusion.High,
+        _ => AmbientOcclusion.Disabled
+    };
     #endregion
 }

@@ -9,11 +9,13 @@ public class GPUMemoryMonitor : MonoBehaviour
 
     private void OnEnable()
     {
-        ProfilerRecorder.StartNew(ProfilerCategory.Memory, "Gfx Used Memory");
+        gfxMemoryRecorder = ProfilerRecorder.StartNew(ProfilerCategory.Memory, "Gfx Used Memory");
     }
 
     private void Update()
     {
+        if (manager == null || manager.refrences == null) return;
+
         if (!gfxMemoryRecorder.Valid)
         {
             manager.refrences.EstimatedGraphicsUsageValueText.text = "N/A";

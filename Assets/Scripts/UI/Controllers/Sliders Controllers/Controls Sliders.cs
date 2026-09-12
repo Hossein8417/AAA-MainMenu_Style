@@ -11,13 +11,13 @@ public class ControlsSliders : MonoBehaviour
     [Header("Settings")]
 
     [SerializeField]
-    private float defaultMouseSentivityValue;
+    private float defaultMouseSentivityValue = 50f;
 
     [SerializeField]
-    private float defaultCameraSentivityValue;
+    private float defaultCameraSentivityValue = 50f;
 
     [SerializeField]
-    private float defaultControllerSentivityValue;
+    private float defaultControllerSentivityValue = 50f;
 
     private void Awake()
     {
@@ -70,19 +70,18 @@ public class ControlsSliders : MonoBehaviour
         slider.maxValue = maxValue;
         slider.wholeNumbers = true;
     }
-    private void LoadData(Slider slider, TMP_Text text, string prefId, int value)
+    private void LoadData(Slider slider, TMP_Text text, string prefId, float defaultValue)
     {
-        float savedValue = PlayerPrefs.GetFloat(prefId, value);
-        if (savedValue > 100.0f || savedValue < 0)
-        {
-            slider.value = value;
-            text.text = value.ToString();
-        }
-        else
-        {
-            slider.value = savedValue;
-            text.text = savedValue.ToString();
-        }
+        if (slider == null) return;
+
+        float savedValue = PlayerPrefs.GetFloat(prefId, defaultValue);
+
+        if (savedValue > 100f || savedValue < 0f)
+            savedValue = defaultValue;
+
+        slider.SetValueWithoutNotify(savedValue);
+
+        if (text != null) text.text = Mathf.RoundToInt(savedValue).ToString();
     }
     #endregion
 }

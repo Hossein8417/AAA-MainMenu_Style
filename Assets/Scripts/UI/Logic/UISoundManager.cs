@@ -10,14 +10,14 @@ public class UISoundManager : MonoBehaviour
     public static UISoundManager Instance;
     private void Awake()
     {
-        if (Instance == null) { 
-            Instance = this;
+        if (Instance != null && Instance != this) {
+            Destroy(gameObject);
+            return;
         }
-        if (Instance != null) { 
-            DontDestroyOnLoad(gameObject);
-        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
     public void UIClick() {
-        clickSound.Play();
+        if (clickSound != null) clickSound.Play();
     }
 }

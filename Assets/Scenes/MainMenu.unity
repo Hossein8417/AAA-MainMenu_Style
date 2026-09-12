@@ -966,21 +966,21 @@ MonoBehaviour:
   maxTessellationFactor: 3.26
   tessellationFactorFadeStart: 150
   tessellationFactorFadeRange: 1850
-  refractionColor: {r: 0.35492665, g: 0.2144901, b: 0.13842872, a: 1}
+  refractionColor: {r: 0.2411783, g: 0.2411783, b: 0.2411783, a: 1}
   maxRefractionDistance: 1.21
   absorptionDistance: 1.5
-  scatteringColor: {r: 0.01634144, g: 0.028595058, b: 0.028595058, a: 1}
+  scatteringColor: {r: 0.004198701, g: 0.03952116, b: 0.14369383, a: 1}
   ambientScattering: 0.566
   heightScattering: 0.602
   displacementScattering: 0.302
   directLightTipScattering: 0.6
   directLightBodyScattering: 0.5
   maximumHeightOverride: 0
-  caustics: 0
+  caustics: 1
   causticsIntensity: 0.5
   causticsPlaneBlendDistance: 1
-  causticsResolution: 256
-  causticsBand: 2
+  causticsResolution: 1024
+  causticsBand: 0
   virtualPlaneDistance: 4
   causticsTilingFactor: 1
   causticsDirectionalShadow: 0
@@ -995,12 +995,12 @@ MonoBehaviour:
   volumeBounds: {fileID: 0}
   volumeDepth: 176.1
   volumeHeight: 5.36
-  volumePrority: 62
+  volumePrority: 190
   absorptionDistanceMultiplier: 1.64
   underWaterAmbientProbeContribution: 1
   underWaterScatteringColorMode: 0
   underWaterScatteringColor: {r: 0, g: 0.27, b: 0.23, a: 1}
-  underWaterRefraction: 0
+  underWaterRefraction: 1
   decalRegionSize: {x: 200, y: 200}
   decalRegionAnchor: {fileID: 0}
 --- !u!4 &438263167
@@ -2945,6 +2945,10 @@ PrefabInstance:
     - target: {fileID: 6485601135728808984, guid: 99cf45c78fb07334990fe17f054345ec, type: 3}
       propertyPath: m_Name
       value: Display Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6485601135728808984, guid: 99cf45c78fb07334990fe17f054345ec, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7036709151376636988, guid: 99cf45c78fb07334990fe17f054345ec, type: 3}
       propertyPath: m_Pivot.x

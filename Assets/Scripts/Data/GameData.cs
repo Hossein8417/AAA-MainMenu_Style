@@ -41,6 +41,14 @@ public class GameData : MonoBehaviour
     public const string LANGUAGE_LOCALE = "LanguageLocale";
     public const string CURRENT_SLOT = "CurrentSlot";
 
+
+    //-----------------
+
+    public const int DEFAULT_ASPECT_INDEX = 0;
+    public const int DEFAULT_RESOLUTION_INDEX = 4;
+    public const int DEFAULT_WIDTH = 1280;
+    public const int DEFAULT_HEIGHT = 720;
+
     public string DateTime() {
         string date = System.DateTime.Now.ToString("yyyy/MM/dd");
         string time = System.DateTime.Now.ToString("HH/mm");

@@ -15,10 +15,7 @@ public class DisplayDropdowns : MonoBehaviour
     private Dictionary<string, List<Resolution>> resolutionMap;
     private List<Resolution> currentFilteredResolutions = new List<Resolution>();
 
-    private const int DEFAULT_ASPECT_INDEX = 0; 
-    private const int DEFAULT_RESOLUTION_INDEX = 4; 
-    private const int DEFAULT_WIDTH = 1280;
-    private const int DEFAULT_HEIGHT = 720;
+    
 
     private void Awake()
     {
@@ -172,14 +169,14 @@ public class DisplayDropdowns : MonoBehaviour
 
     private void LoadSavedAspect()
     {
-        int savedAspectIndex = DEFAULT_ASPECT_INDEX;
+        int savedAspectIndex = GameData.DEFAULT_ASPECT_INDEX;
 
         if (savePreference && PlayerPrefs.HasKey(GameData.ASPECTY_RATIO))
         {
-            savedAspectIndex = PlayerPrefs.GetInt(GameData.ASPECTY_RATIO, DEFAULT_ASPECT_INDEX);
+            savedAspectIndex = PlayerPrefs.GetInt(GameData.ASPECTY_RATIO, GameData.DEFAULT_ASPECT_INDEX);
 
             if (savedAspectIndex < 0 || savedAspectIndex >= aspectRatios.Length)
-                savedAspectIndex = DEFAULT_ASPECT_INDEX;
+                savedAspectIndex = GameData.DEFAULT_ASPECT_INDEX;
         }
         else
         {
@@ -197,15 +194,15 @@ public class DisplayDropdowns : MonoBehaviour
 
     private void LoadSavedResolution()
     {
-        int savedResIndex = DEFAULT_RESOLUTION_INDEX;
+        int savedResIndex = GameData.DEFAULT_RESOLUTION_INDEX;
 
         if (savePreference && PlayerPrefs.HasKey(GameData.DISPLAY_RESOLUTION))
         {
-            savedResIndex = PlayerPrefs.GetInt(GameData.DISPLAY_RESOLUTION, DEFAULT_RESOLUTION_INDEX);
+            savedResIndex = PlayerPrefs.GetInt(GameData.DISPLAY_RESOLUTION, GameData.DEFAULT_RESOLUTION_INDEX);
         }
 
         if (savedResIndex < 0 || savedResIndex >= currentFilteredResolutions.Count)
-            savedResIndex = Mathf.Min(DEFAULT_RESOLUTION_INDEX, currentFilteredResolutions.Count - 1);
+            savedResIndex = Mathf.Min(GameData.DEFAULT_RESOLUTION_INDEX, currentFilteredResolutions.Count - 1);
 
         manager.refrences.DisplayResolutionDropdown.SetValueWithoutNotify(savedResIndex);
         manager.refrences.DisplayResolutionDropdown.RefreshShownValue();
